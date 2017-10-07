@@ -1,14 +1,12 @@
+import math as m
 import struct
-
-from PIL import Image
-from PyQt5 import QtOpenGL, QtWidgets, QtCore
-from PyQt5.QtGui import QCursor, QKeyEvent
+from enum import Enum
 
 import ModernGL
-
-import math as m
 import numpy as np
-from enum import Enum
+from PIL import Image
+from PyQt5 import QtOpenGL, QtWidgets, QtCore
+from PyQt5.QtGui import QCursor
 
 import matmult as mm
 
@@ -178,8 +176,10 @@ class PerspectiveWindow(QtOpenGL.QGLWidget):
         self.center_x = self.geometry().x() + self.width() / 2
         self.center_y = self.geometry().y() + self.height() / 2
 
-import copy
-import biome_generators
+
+from MineSim import biome_generators
+
+
 class ModelInstancer(PerspectiveWindow):
     def __init__(self):
         '''self.meshes = []
@@ -241,7 +241,7 @@ class ModelInstancer(PerspectiveWindow):
             trans_list = []
             for x in range(200): # 1 decikilometer ftw
                 for y in range(200):
-                    trans_list.append(mm.translate_mat(*biome_generators.plains_top_inst_gen(x*2, y*2), np.float32))
+                    trans_list.append(mm.translate_mat(*biome_generators.plains_top_inst_gen(x * 2, y * 2), np.float32))
                 if x%200==0:
                     print(x*200)
             vao_instancer = Instancer(vao, 40000, trans_list)
