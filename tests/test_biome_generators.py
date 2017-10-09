@@ -2,14 +2,9 @@ import unittest
 
 import MineSim.biome_generators as biogen
 
-import matplotlib
-#matplotlib.use('gtk3cairo')
-matplotlib.use('qt5agg') # best so far!
-
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
 import numpy as np
 
+import vtk
 
 
 def convertToNumber (s):
@@ -19,6 +14,7 @@ def convertToColor(s):
     i = convertToNumber (s)
     return ((i/(255**2))%1.0, (i/255)%(1.0), i%1.0)
 
+#todo: create 3d testing library for point clouds
 class MockModel(object):
     def __init__(self):
         self.dots = []
@@ -27,49 +23,70 @@ class MockModel(object):
     def add_block(self, position, type, immediate = False):
         self.dots.append((*position, convertToColor(type)))
 
-    def show_scatter(self):
-        fig = plt.figure()
-        ax = fig.add_subplot(1,1,1, projection='3d')
-        for dot in self.dots:
-            #swap y and z to match glsl
-            ax.scatter(dot[0], dot[1], dot[2], c=dot[3], marker='.')
+    def show_cloud(self):
+        points = vtk.vtkPoints()
 
-        ax.set_xlabel('X')
-        ax.set_ylabel('Z')
-        ax.set_zlabel('Y')
+        vertices = vtk.vtkCellArray()
 
-        plt.show()
+        for d in self.dots:
+            p = points.InsertNextPoint((d[0], d[1], d[2]))
+            vertices.InsertNextCell(1)
+            vertices.InsertCellPoint(p)
 
-    def show_wire(self):
-        fig = plt.figure()
-        ax = fig.add_subplot(1,1,1, projection='3d')
-        # swap y and z to match glsl
-        ax.plot_wireframe([dot[0] for dot in self.dots],
-                          [dot[1] for dot in self.dots],
-                          [dot[2] for dot in self.dots])
+        cloud = vtk.vtkPolyData()
 
-        ax.set_xlabel('X')
-        ax.set_ylabel('Z')
-        ax.set_zlabel('Y')
+        cloud.SetPoints(points)
+        cloud.SetVerts(vertices)
 
-        plt.show()
+        # Visualize
+        mapper = vtk.vtkPolyDataMapper()
+        if vtk.VTK_MAJOR_VERSION <= 5:
+            mapper.SetInput(cloud)
+        else:
+            mapper.SetInputData(cloud)
+
+        actor = vtk.vtkActor()
+        actor.SetMapper(mapper)
+        actor.GetProperty().SetPointSize(2)
+
+        renderer = vtk.vtkRenderer()
+        renderWindow = vtk.vtkRenderWindow()
+        renderWindow.AddRenderer(renderer)
+        renderWindowInteractor = vtk.vtkRenderWindowInteractor()
+        renderWindowInteractor.SetRenderWindow(renderWindow)
+
+        renderer.AddActor(actor)
+
+        renderWindow.Render()
+        renderWindowInteractor.Start()
+
 
 
 class TestBiomeGenerators(unittest.TestCase):
     def testPlainsGenSmall(self):
         mockmod = MockModel()
-        biogen.plains_gen(mockmod, 10, 1, None)
-        mockmod.show_scatter()
+        biogen.plains_gen(mockmod, 10, 1, None) #todo: eliminate none argument
+        mockmod.show_cloud()
 
     def testPlainsGenLarge(self):
         mockmod = MockModel()
         biogen.plains_gen(mockmod, 100, 1, None)
-        mockmod.show_wire()
+        mockmod.show_cloud()
 
     def testStoneContainer(self):
         mockmod = MockModel()
         biogen.stone_container_gen(mockmod, 5, 1, 5, height=3)
-        mockmod.show_scatter()
+        mockmod.show_cloud()
 
     def testCloudLayerGen(self):
-        pass
+        mockmod = MockModel()
+        biogen.cloud_layer_gen(mockmod,100, 1, None)
+        mockmod.show_cloud()
+
+    def testFoamGen(self):
+        mockmod = MockModel()
+        biogen.foam_gen(mockmod, 100, 1, 0)
+        mockmod.show_cloud()
+
+    def testCaveDig(self):
+        self.fail()

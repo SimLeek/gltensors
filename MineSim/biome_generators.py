@@ -47,12 +47,12 @@ def cloud_layer_gen(model, n, s, y, size=1, density=0, min_height=20, max_height
                     model.add_block((x, h, z), 'cloud', immediate=False)
 
 
-def foam_gen(model, n, s, y, size=1, density=0):  # 0 is half density, 1 is empty, -1 is full
+def foam_gen(model, n, s, y, height=40, size=1, density=0):  # 0 is half density, 1 is empty, -1 is full
     for x in xrange(-n, n + 1, s):
         for z in xrange(-n, n + 1, s):
             noise = OpenSimplex()
 
-            for h in xrange(y - 1, 40):
+            for h in xrange(y - 1, height):
                 if noise.noise3d(x / (10.0 * size), z / (10.0 * size), h / (3.0 * size)) > density:
                     model.add_block((x, h, z), 'aluminum', immediate=False)
 

@@ -8,8 +8,6 @@ from PIL import Image
 from PyQt5 import QtOpenGL, QtWidgets, QtCore
 from PyQt5.QtGui import QCursor
 
-import matmult as mm
-
 global additional_dirs
 additional_dirs = []
 
@@ -177,7 +175,7 @@ class PerspectiveWindow(QtOpenGL.QGLWidget):
         self.center_y = self.geometry().y() + self.height() / 2
 
 
-from MineSim import biome_generators
+from MineSim import biome_generators, matmult as mm
 
 
 class ModelInstancer(PerspectiveWindow):
