@@ -23,6 +23,11 @@ class MockModel(object):
     def add_block(self, position, type, immediate = False):
         self.dots.append((*position, convertToColor(type)))
 
+    def batch_blocks(self, array_in, type):
+        block_locs = np.transpose(np.nonzero(array_in))
+        self.dots = block_locs
+
+
     def show_cloud(self):
         points = vtk.vtkPoints()
 
@@ -63,6 +68,11 @@ class MockModel(object):
 
 
 class TestBiomeGenerators(unittest.TestCase):
+    def testPlainsGenNew(self):
+        mockmod = MockModel()
+        biogen.plains_gen(mockmod, 100, 100, 100, 30, 50, turbulence=0.03)
+        mockmod.show_cloud()
+
     def testPlainsGenSmall(self):
         mockmod = MockModel()
         biogen.plains_gen(mockmod, 10, 1, None) #todo: eliminate none argument

@@ -1,10 +1,11 @@
 import sys
+import os
 
 if sys.version_info[0] >= 3:
     xrange = range
 
 from opensimplex import OpenSimplex
-
+from MineSim.GLSLComputer import *
 
 def plains_top_inst_gen(x, z, turbulence=1):
     noise = OpenSimplex()
@@ -12,8 +13,31 @@ def plains_top_inst_gen(x, z, turbulence=1):
     top_h = int((height + 1) * 10)
     return [x, z, top_h * 2]
 
+def plains_gen(model, width, height, depth, min_z, max_z, turbulence=1):
+    import numpy as np
 
-def plains_gen(model, n, s, y, turbulence=1):
+    script_dir = os.path.dirname(__file__)
+
+    shader_file = open(script_dir+"/shaders/compute2DNoise.glsl")
+    simplex_shader = shader_file.read()
+    shader_file.close()
+
+    simplex_shader = glsl_import_filter(simplex_shader, script_dir+"/shaders/")
+
+    test_computer = GLSLComputer(simplex_shader,
+                                 width=width, height=height, depth=depth,
+                                 min_z=min_z, max_z=max_z, turbulence=turbulence)
+
+    buff = test_computer.ctx.buffer(data = np.zeros(width*height*depth).astype(dtype=np.float32).tobytes())
+    buff.bind_to_storage_buffer(1)
+
+    test_computer.cpu.run(width,height,depth)
+
+    simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
+    model.batch_blocks(simplex_out, 'grass')
+
+
+'''def plains_gen(model, n, s, y, turbulence=1):
     for x in xrange(-n, n + 1, s):
         for z in xrange(-n, n + 1, s):
             # create a layer stone an grass everywhere.
@@ -21,8 +45,7 @@ def plains_gen(model, n, s, y, turbulence=1):
             height = noise.noise2d(x / (100.0 / turbulence), z / (100.0 / turbulence))
             top_h = int((height + 1) * 10)
 
-            model.add_block((x, z, top_h), 'grass', immediate=False)
-
+            model.add_block((x, z, top_h), 'grass', immediate=False)'''
 
 def stone_container_gen(model, n, s, y, height=20):
     for x in xrange(-n, n + 1, s):
