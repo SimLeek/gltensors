@@ -5,7 +5,8 @@ if sys.version_info[0] >= 3:
     xrange = range
 
 from opensimplex import OpenSimplex
-from MineSim.GLSLComputer import *
+from minesim.GLSLComputer import *
+from minesim.glsl_util import glsl_import_filter
 
 def plains_top_inst_gen(x, z, turbulence=1):
     noise = OpenSimplex()
@@ -13,7 +14,7 @@ def plains_top_inst_gen(x, z, turbulence=1):
     top_h = int((height + 1) * 10)
     return [x, z, top_h * 2]
 
-def plains_gen(model, width, height, depth, min_z, max_z, turbulence=1):
+def plains_gen(width, height, depth, min_z, max_z, turbulence=1):
     import numpy as np
 
     script_dir = os.path.dirname(__file__)
@@ -34,7 +35,8 @@ def plains_gen(model, width, height, depth, min_z, max_z, turbulence=1):
     test_computer.cpu.run(width,height,depth)
 
     simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
-    model.batch_blocks(simplex_out, 'grass')
+    locations_out = np.transpose(np.nonzero(simplex_out))
+    return locations_out
 
 
 '''def plains_gen(model, n, s, y, turbulence=1):

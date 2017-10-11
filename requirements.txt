@@ -1,3 +1,4 @@
 pytest
 vtk
 opensimplex
+#wavefront_reader

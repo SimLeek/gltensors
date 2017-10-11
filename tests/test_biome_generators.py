@@ -1,6 +1,6 @@
 import unittest
 
-import MineSim.biome_generators as biogen
+import minesim.biome_generators as biogen
 
 import numpy as np
 
@@ -68,19 +68,9 @@ class MockModel(object):
 
 
 class TestBiomeGenerators(unittest.TestCase):
-    def testPlainsGenNew(self):
+    def testPlainsGen(self):
         mockmod = MockModel()
-        biogen.plains_gen(mockmod, 100, 100, 100, 30, 50, turbulence=0.03)
-        mockmod.show_cloud()
-
-    def testPlainsGenSmall(self):
-        mockmod = MockModel()
-        biogen.plains_gen(mockmod, 10, 1, None) #todo: eliminate none argument
-        mockmod.show_cloud()
-
-    def testPlainsGenLarge(self):
-        mockmod = MockModel()
-        biogen.plains_gen(mockmod, 100, 1, None)
+        biogen.plains_gen(mockmod, 100, 100, 100, 30, 50, turbulence=0.01)
         mockmod.show_cloud()
 
     def testStoneContainer(self):

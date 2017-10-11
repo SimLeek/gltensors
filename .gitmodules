@@ -1,0 +1,4 @@
+[submodule "wavefront_reader"]
+	path = wavefront_reader
+	url = https://github.com/SimLeek/wavefront_reader.git
+	branch = master
