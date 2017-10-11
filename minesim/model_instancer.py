@@ -48,16 +48,16 @@ class ModelInstancer(PerspectiveWindow):
                     gl_mesh += struct.pack('2f', *f.vertex_textures[v])
 
             vbo = self.ctx.buffer(gl_mesh)
-            vao = self.ctx.simple_vertex_array(self.prog, vbo, ['vertex', 'texture_coord'])  # tex_coord
+            vao = self.ctx.simple_vertex_array(self.prog, vbo, ['vertex'])  # texture_coord
             trans_list = []
-            plains = biogen.plains_gen(100, 100, 100, 30, 50, turbulence=0.01)
+            plains = biogen.plains_gen(20, 20, 20, 10, 15, turbulence=0.01)
             for voxel in plains:
                 trans_list.append(mm.translate_mat(*voxel, np.float32))
 
-            vao_instancer = Instancer(vao, 40000, trans_list)
+            vao_instancer = Instancer(vao, len(trans_list), trans_list)
             print("made")
             #todo: use compute shader to set matrices initially
-            for x in range(40000):
+            for x in range(len(trans_list)):
                 self.x_forms.extend(struct.pack('16f', *((vao_instancer.transforms[x]).flatten().tolist()[0])))
                 if x%200==0:
                     print(x)
@@ -69,7 +69,3 @@ class ModelInstancer(PerspectiveWindow):
             print("bound")
 
             self.vao_instances[filename] = vao_instancer
-        '''for material in scene.materials:
-            self.materials.append(material)
-        for texture in scene.textures:
-            self.textures.append(texture)'''

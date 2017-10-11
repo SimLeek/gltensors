@@ -24,8 +24,7 @@ class MockModel(object):
         self.dots.append((*position, convertToColor(type)))
 
     def batch_blocks(self, array_in, type):
-        block_locs = np.transpose(np.nonzero(array_in))
-        self.dots = block_locs
+        self.dots = array_in
 
 
     def show_cloud(self):
@@ -70,7 +69,7 @@ class MockModel(object):
 class TestBiomeGenerators(unittest.TestCase):
     def testPlainsGen(self):
         mockmod = MockModel()
-        biogen.plains_gen(mockmod, 100, 100, 100, 30, 50, turbulence=0.01)
+        mockmod.batch_blocks(biogen.plains_gen( 100, 100, 100, 30, 50, turbulence=0.01), 'grass')
         mockmod.show_cloud()
 
     def testStoneContainer(self):

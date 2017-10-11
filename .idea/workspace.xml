@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4456845b-02d5-479b-aa35-bbe9677bc818" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/wavefront_reader" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitmodules" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minesim/glsl_util.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minesim/model_instancer.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minesim/perspective_window.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minesim/shaders/perspective_fragment.glsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/minesim/shaders/perspective_vertex.glsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/test_perspective_window.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MineSim/wavefront_loader.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/GLSLComputer.py" afterPath="$PROJECT_DIR$/minesim/GLSLComputer.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/__init__.py" afterPath="$PROJECT_DIR$/minesim/blocks/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/biome_generators.py" afterPath="$PROJECT_DIR$/minesim/biome_generators.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/blocks/__init__.py" afterPath="$PROJECT_DIR$/minesim/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/blocks/cube.mtl" afterPath="$PROJECT_DIR$/minesim/blocks/cube.mtl" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/blocks/cube.obj" afterPath="$PROJECT_DIR$/minesim/blocks/cube.obj" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/blocks/grass block.dae" afterPath="$PROJECT_DIR$/minesim/blocks/grass block.dae" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/blocks/grass block.png" afterPath="$PROJECT_DIR$/minesim/blocks/grass block.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/matmult.py" afterPath="$PROJECT_DIR$/minesim/matmult.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/shaders/compute2DNoise.glsl" afterPath="$PROJECT_DIR$/minesim/shaders/compute2DNoise.glsl" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/shaders/simplex2D.glsl" afterPath="$PROJECT_DIR$/minesim/shaders/simplex2D.glsl" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/MineSim/shaders/simplex3D.glsl" afterPath="$PROJECT_DIR$/minesim/shaders/simplex3D.glsl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/MineSim.iml" afterPath="$PROJECT_DIR$/.idea/MineSim.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minesim.py" afterPath="$PROJECT_DIR$/minesim.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minesim/blocks/cube.obj" afterPath="$PROJECT_DIR$/minesim/blocks/cube.obj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minesim/model_instancer.py" afterPath="$PROJECT_DIR$/minesim/model_instancer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minesim/perspective_window.py" afterPath="$PROJECT_DIR$/minesim/perspective_window.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/minesim/shaders/perspective_fragment.glsl" afterPath="$PROJECT_DIR$/minesim/shaders/perspective_fragment.glsl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_biome_generators.py" afterPath="$PROJECT_DIR$/tests/test_biome_generators.py" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -55,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="model_instancer.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="model_instancer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/minesim/model_instancer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="57" column="19" lean-forward="false" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+            <state relative-caret-position="137">
+              <caret line="50" column="72" lean-forward="false" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
               <folding>
                 <element signature="e#0#56#0" expanded="true" />
               </folding>
@@ -67,33 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_wavefront_reader.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wavefront_reader/tests/test_wavefront_reader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Image.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/PIL/Image.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="2476" column="0" lean-forward="false" selection-start-line="2476" selection-start-column="0" selection-end-line="2476" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="reading.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wavefront_reader/wavefront_reader/reading.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="28" column="54" lean-forward="false" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
+            <state relative-caret-position="17">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
                 <element signature="e#24#42#0" expanded="true" />
               </folding>
@@ -105,30 +64,8 @@
         <entry file="file://$PROJECT_DIR$/minesim/blocks/cube.mtl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="6" />
+              <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GLSLComputer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/minesim/GLSLComputer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="biome_generators.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/minesim/biome_generators.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-585">
-              <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -136,8 +73,8 @@
       <file leaf-file-name="perspective_window.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/minesim/perspective_window.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state relative-caret-position="126">
+              <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -145,13 +82,53 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_mtl_reader.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wavefront_reader/tests/test_mtl_reader.py">
+      <file leaf-file-name="perspective_fragment.glsl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/minesim/shaders/perspective_fragment.glsl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="8" lean-forward="false" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="48" />
+            <state relative-caret-position="170">
+              <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="members.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/ModernGL/members.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="636" column="0" lean-forward="false" selection-start-line="636" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="buffers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/ModernGL/buffers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="318">
+              <caret line="375" column="0" lean-forward="false" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="perspective_vertex.glsl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/minesim/shaders/perspective_vertex.glsl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="131">
+              <caret line="14" column="7" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_biome_generators.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_biome_generators.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="455">
+              <caret line="71" column="95" lean-forward="false" selection-start-line="71" selection-start-column="95" selection-end-line="71" selection-end-column="95" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -179,6 +156,9 @@
       <find>load_mode</find>
       <find>path</find>
       <find>made</find>
+      <find>vao_in</find>
+      <find>triangl</find>
+      <find>no_xforms</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -188,22 +168,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/tests/testvtk.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/MineSim/shaders/simplex3D.glsl" />
         <option value="$PROJECT_DIR$/MineSim/shaders/simplex2D.glsl" />
         <option value="$PROJECT_DIR$/MineSim/GLSLComputer.py" />
         <option value="$PROJECT_DIR$/MineSim/biome_generators.py" />
         <option value="$PROJECT_DIR$/MineSim/shaders/compute2DNoise.glsl" />
-        <option value="$PROJECT_DIR$/tests/test_biome_generators.py" />
         <option value="$PROJECT_DIR$/MineSim/wavefront_loader.py" />
         <option value="$PROJECT_DIR$/MineSim/perspective_window.py" />
         <option value="$PROJECT_DIR$/minesim/glsl_util.py" />
         <option value="$PROJECT_DIR$/minesim/GLSLComputer.py" />
         <option value="$PROJECT_DIR$/minesim/shaders/perspective_vertix.glsl" />
-        <option value="$PROJECT_DIR$/minesim/shaders/perspective_fragment.glsl" />
         <option value="$PROJECT_DIR$/tests/test_perspective_window.py" />
         <option value="$PROJECT_DIR$/minesim/shaders/perspective_vertex.glsl" />
-        <option value="$PROJECT_DIR$/minesim/perspective_window.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/wavefront_reader/tests/test_obj_reader.py" />
         <option value="$PROJECT_DIR$/wavefront_reader/README.rst" />
@@ -212,14 +188,19 @@
         <option value="$PROJECT_DIR$/wavefront_reader/tests/test_mtl_reader.py" />
         <option value="$PROJECT_DIR$/wavefront_reader/tests/test_wavefront_reader.py" />
         <option value="$PROJECT_DIR$/minesim.py" />
-        <option value="$PROJECT_DIR$/minesim/model_instancer.py" />
         <option value="$PROJECT_DIR$/wavefront_reader/wavefront_reader/reading.py" />
         <option value="$PROJECT_DIR$/minesim/biome_generators.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/minesim/blocks/cube.mtl" />
+        <option value="$PROJECT_DIR$/minesim/model_instancer.py" />
+        <option value="$PROJECT_DIR$/minesim/perspective_window.py" />
+        <option value="$PROJECT_DIR$/minesim/shaders/perspective_fragment.glsl" />
+        <option value="$PROJECT_DIR$/tests/test_biome_generators.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
+    <option name="width" value="960" />
     <option name="height" value="1062" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -239,6 +220,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -257,11 +239,21 @@
               <item name="minesim" type="462c0819:PsiDirectoryNode" />
               <item name="blocks" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MineSim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineSim" type="462c0819:PsiDirectoryNode" />
+              <item name="minesim" type="462c0819:PsiDirectoryNode" />
+              <item name="shaders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MineSim" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineSim" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -297,7 +289,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.minesim">
+  <component name="RunManager" selected="Python tests.py.test for test_biome_generators.TestBiomeGenerators.testPlainsGen">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -395,19 +387,19 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="py.test for test_mtl_reader.TestObjReader" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="py.test for test_biome_generators.TestBiomeGenerators.testPlainsGen" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/wavefront_reader/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MineSim" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_mtl_reader.TestObjReader&quot;" />
+      <option name="_new_target" value="&quot;test_biome_generators.TestBiomeGenerators.testPlainsGen&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <configuration name="py.test for test_wavefront_reader.TestWavefrontReader" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
@@ -456,19 +448,19 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python tests.py.test for test_mtl_reader.TestObjReader" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader.test_all_materials_extracted" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader.test_geoms_have_material_dict" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader" />
-      <item index="4" class="java.lang.String" itemvalue="Python.minesim" />
+      <item index="0" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader.test_all_materials_extracted" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader.test_geoms_have_material_dict" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader" />
+      <item index="3" class="java.lang.String" itemvalue="Python.minesim" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.py.test for test_biome_generators.TestBiomeGenerators.testPlainsGen" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.minesim" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader.test_geoms_have_material_dict" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader.test_all_materials_extracted" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.py.test for test_mtl_reader.TestObjReader" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.py.test for test_biome_generators.TestBiomeGenerators.testPlainsGen" />
+        <item index="1" class="java.lang.String" itemvalue="Python.minesim" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader.test_geoms_have_material_dict" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.py.test for test_wavefront_reader.TestWavefrontReader.test_all_materials_extracted" />
       </list>
     </recent_temporary>
   </component>
@@ -510,18 +502,25 @@
       <option name="project" value="LOCAL" />
       <updated>1507598785126</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="tested perspective window. Got window to pop up. Need to show models now.">
+      <created>1507691856436</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1507691856436</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="py_test_for_test_mtl_reader_TestObjReader - 2017.10.10 at 19h 21m 28s.xml">
-      <configuration name="py.test for test_mtl_reader.TestObjReader" configurationId="tests" />
+    <history-entry file="py_test_for_test_biome_generators_TestBiomeGenerators_testPlainsGen - 2017.10.10 at 23h 45m 01s.xml">
+      <configuration name="py.test for test_biome_generators.TestBiomeGenerators.testPlainsGen" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_for_test_mtl_reader_TestObjReader_test_all_materials_extracted - 2017.10.10 at 19h 16m 09s.xml">
-      <configuration name="py.test for test_mtl_reader.TestObjReader.test_all_materials_extracted" configurationId="tests" />
+    <history-entry file="py_test_for_test_biome_generators_TestBiomeGenerators_testPlainsGen - 2017.10.10 at 23h 45m 44s.xml">
+      <configuration name="py.test for test_biome_generators.TestBiomeGenerators.testPlainsGen" configurationId="tests" />
     </history-entry>
-    <history-entry file="py_test_for_test_mtl_reader_TestObjReader_test_all_materials_extracted - 2017.10.10 at 19h 17m 55s.xml">
-      <configuration name="py.test for test_mtl_reader.TestObjReader.test_all_materials_extracted" configurationId="tests" />
+    <history-entry file="py_test_for_test_biome_generators_TestBiomeGenerators_testPlainsGen - 2017.10.10 at 23h 50m 24s.xml">
+      <configuration name="py.test for test_biome_generators.TestBiomeGenerators.testPlainsGen" configurationId="tests" />
     </history-entry>
     <history-entry file="py_test_for_test_mtl_reader_TestObjReader_test_all_materials_extracted - 2017.10.10 at 19h 17m 58s.xml">
       <configuration name="py.test for test_mtl_reader.TestObjReader.test_all_materials_extracted" configurationId="tests" />
@@ -546,9 +545,10 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1062" extended-state="0" />
+    <frame x="0" y="0" width="960" height="1062" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10245464" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26586434" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20021187" sideWeight="0.5131291" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32944915" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -578,7 +578,8 @@
     <MESSAGE value="added some testing" />
     <MESSAGE value="made most of a parser for .obj files" />
     <MESSAGE value="added 1000 times faster world generator. Some tests added." />
-    <option name="LAST_COMMIT_MESSAGE" value="added 1000 times faster world generator. Some tests added." />
+    <MESSAGE value="tested perspective window. Got window to pop up. Need to show models now." />
+    <option name="LAST_COMMIT_MESSAGE" value="tested perspective window. Got window to pop up. Need to show models now." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -593,6 +594,16 @@
           <line>206</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/minesim/model_instancer.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/minesim/perspective_window.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -601,16 +612,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="15" />
+      <option name="time" value="34" />
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="PythonConfigurationType">
-        <watch expression="f.vertexes" language="Python" />
-      </configuration>
-    </watches-manager>
+    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MineSim/wavefront_loader.py" />
     <entry file="file://$PROJECT_DIR$/minesim.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -664,14 +670,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/ModernGL/buffers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="266" column="0" lean-forward="false" selection-start-line="266" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons/re.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -695,36 +693,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/minesim/shaders/perspective_fragment.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="1" lean-forward="false" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/minesim/shaders/perspective_vertex.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="9" column="2" lean-forward="false" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/ModernGL/members.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="177" column="0" lean-forward="false" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/wavefront_reader/wavefront_reader.py" />
     <entry file="file://$PROJECT_DIR$/wavefront_reader/.github/ISSUE_TEMPLATE.md" />
     <entry file="file://$PROJECT_DIR$/wavefront_reader/wavefront_reader/writing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -732,7 +706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -745,21 +718,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wavefront_reader/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="510">
             <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-            <folding />
           </first_editor>
           <second_editor>
             <js_state />
           </second_editor>
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -767,7 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
           <caret line="43" column="46" lean-forward="true" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -775,26 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="34">
-            <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="49" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <js_state />
-          </second_editor>
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -802,9 +752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="77" />
-          <folding>
-            <element signature="e#47#66#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -812,7 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="2" lean-forward="false" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -820,19 +766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_biome_generators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="72" column="52" lean-forward="false" selection-start-line="72" selection-start-column="52" selection-end-line="72" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -840,7 +773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -848,35 +780,84 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="8" lean-forward="false" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/minesim/blocks/cube.mtl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wavefront_reader/tests/test_wavefront_reader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="340">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#19#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/PIL/Image.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
+        <state relative-caret-position="42024">
           <caret line="2476" column="0" lean-forward="false" selection-start-line="2476" selection-start-column="0" selection-end-line="2476" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/minesim/biome_generators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#10#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="23" lean-forward="false" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="187">
+            <caret line="11" column="39" lean-forward="false" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+            <folding />
+          </first_editor>
+          <second_editor>
+            <js_state />
+          </second_editor>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/minesim/blocks/grass block.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/minesim/blocks/cube.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/minesim/blocks/cube.mtl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="7" lean-forward="false" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wavefront_reader/wavefront_reader/reading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#24#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -891,50 +872,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/minesim/blocks/cube.obj">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/ModernGL/members.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="145">
+          <caret line="636" column="0" lean-forward="false" selection-start-line="636" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wavefront_reader/wavefront_reader/reading.py">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/ModernGL/buffers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="28" column="54" lean-forward="false" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
-          <folding>
-            <element signature="e#24#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="318">
+          <caret line="375" column="0" lean-forward="false" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/minesim/biome_generators.py">
+    <entry file="file://$PROJECT_DIR$/minesim/model_instancer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-585">
-          <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+        <state relative-caret-position="137">
+          <caret line="50" column="72" lean-forward="false" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#56#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/minesim/perspective_window.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="74" column="0" lean-forward="true" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state relative-caret-position="126">
+          <caret line="28" column="9" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/minesim/model_instancer.py">
+    <entry file="file://$PROJECT_DIR$/minesim/shaders/perspective_fragment.glsl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="57" column="19" lean-forward="false" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+        <state relative-caret-position="170">
+          <caret line="10" column="31" lean-forward="false" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/minesim/shaders/perspective_vertex.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="14" column="7" lean-forward="false" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_biome_generators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="71" column="95" lean-forward="false" selection-start-line="71" selection-start-column="95" selection-end-line="71" selection-end-column="95" />
           <folding>
-            <element signature="e#0#56#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

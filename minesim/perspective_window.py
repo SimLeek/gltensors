@@ -26,6 +26,7 @@ class PerspectiveWindow(QtOpenGL.QGLWidget):
 
     def paintGL(self):
         self.ctx.viewport = (0, 0, self.width(), self.height())
+        #self.ctx.wireframe = True
         self.ratio = self.width() / self.height()
         self.p_mat = mm.perspective_mat(z_near=0.1, z_far=1000.0,
                                         ratio=self.ratio,
