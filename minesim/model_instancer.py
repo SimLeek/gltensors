@@ -43,8 +43,8 @@ class ModelInstancer(PerspectiveWindow):
             texture.use()
 
             for f in mesh.faces:
-                for v in range(len(f.vertexes)):
-                    gl_mesh += struct.pack('4f', *f.vertexes[v],1.0) # use 0.0 for skyboxes
+                for v in range(len(f.vertices)):
+                    gl_mesh += struct.pack('4f', *f.vertices[v], 1.0) # use 0.0 for skyboxes
                     gl_mesh += struct.pack('2f', *f.vertex_textures[v])
 
             vbo = self.ctx.buffer(gl_mesh)

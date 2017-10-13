@@ -155,7 +155,7 @@ def scale_rot_trans_mat(xs, ys, zs, xt, yt, zt, xv,yv,zv,angle, dtype=None):
 def rot_trans_mat(xt, yt, zt, xv,yv,zv,angle, dtype=None):
     return quat_mat(Quaternion.from_axis(xv,yv,zv,angle), dtype) * translate_mat(xt,yt,zt,dtype)
 
-def perspective_mat(z_near, z_far, fov_y, ratio, dtype = None):
+def perspective_mat(z_near, z_far, fov_y, ratio, dtype = None):  # type: (...)->np.matrix
     z_mul = (-2.0*z_near*z_far) / (z_far - z_near)
     y_mul = -1.0 * m.tan(fov_y)
     x_mul = y_mul / ratio
