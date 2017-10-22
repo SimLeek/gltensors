@@ -67,6 +67,8 @@ class MockModel(object):
 
 
 class TestBiomeGenerators(unittest.TestCase):
+    # todo: change this to a non-interactive test, like glsl_compute tests
+    # todo: add interactive tests that require y/n == y to pass
     def testPlainsGen(self):
         mockmod = MockModel()
         mockmod.batch_blocks(biogen.plains_gen( 100, 100, 100, 30, 50, turbulence=0.01), 'grass')
