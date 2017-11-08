@@ -49,7 +49,30 @@ def plains_gen(width, height, depth, min_z, max_z, turbulence=1):
 
             model.add_block((x, z, top_h), 'grass', immediate=False)'''
 
-def stone_container_gen(model, n, s, y, height=20):
+def stone_container_gen(width, height, depth):
+    import numpy as np
+
+    script_dir = os.path.dirname(__file__)
+
+    shader_file = open(script_dir+"/shaders/computeContainer.glsl")
+    simplex_shader = shader_file.read()
+    shader_file.close()
+
+    simplex_shader = glsl_import_filter(simplex_shader, script_dir+"/shaders/")
+
+    test_computer = GLSLComputer(simplex_shader,
+                                 width=width, height=height, depth=depth)
+
+    buff = test_computer.ctx.buffer(data = np.zeros(width*height*depth).astype(dtype=np.float32).tobytes())
+    buff.bind_to_storage_buffer(1)
+
+    test_computer.cpu.run(width,height,depth)
+
+    simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
+    locations_out = np.transpose(np.nonzero(simplex_out))
+    return locations_out
+
+'''def stone_container_gen(model, n, s, y, height=20):
     for x in xrange(-n, n + 1, s):
         for z in xrange(-n, n + 1, s):
             model.add_block((x, y - 3, z), 'stone', immediate=False)
@@ -57,10 +80,57 @@ def stone_container_gen(model, n, s, y, height=20):
             if x in (-n, n) or z in (-n, n):
                 # create outer walls.
                 for dy in xrange(-2, height):
-                    model.add_block((x, y + dy, z), 'stone', immediate=False)
+                    model.add_block((x, y + dy, z), 'stone', immediate=False)'''
 
+def cloud_layer_gen(width, height, depth, turbulence=1, density = 0.0, dissipation_rate=.1):
+    import numpy as np
 
-def cloud_layer_gen(model, n, s, y, size=1, density=0, min_height=20, max_height=40, cloud_height=30,
+    script_dir = os.path.dirname(__file__)
+
+    shader_file = open(script_dir+"/shaders/compute3DNoiseLayer.glsl")
+    simplex_shader = shader_file.read()
+    shader_file.close()
+
+    simplex_shader = glsl_import_filter(simplex_shader, script_dir+"/shaders/")
+
+    test_computer = GLSLComputer(simplex_shader,
+                                 width=width, height=height, depth=depth,
+                                 turbulence=turbulence, density=density, dissipation_rate=dissipation_rate)
+
+    buff = test_computer.ctx.buffer(data = np.zeros(width*height*depth).astype(dtype=np.float32).tobytes())
+    buff.bind_to_storage_buffer(1)
+
+    test_computer.cpu.run(width,height,depth)
+
+    simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
+    locations_out = np.transpose(np.nonzero(simplex_out))
+    return locations_out
+
+def inverse_cloud_layer_gen(width, height, depth, turbulence=1, density = 0.0, dissipation_rate=.1):
+    import numpy as np
+
+    script_dir = os.path.dirname(__file__)
+
+    shader_file = open(script_dir+"/shaders/compute3DNoiseLayer.glsl")
+    simplex_shader = shader_file.read()
+    shader_file.close()
+
+    simplex_shader = glsl_import_filter(simplex_shader, script_dir+"/shaders/")
+
+    test_computer = GLSLComputer(simplex_shader,
+                                 width=width, height=height, depth=depth,
+                                 turbulence=turbulence, density=density, dissipation_rate=dissipation_rate)
+
+    buff = test_computer.ctx.buffer(data = np.zeros(width*height*depth).astype(dtype=np.float32).tobytes())
+    buff.bind_to_storage_buffer(1)
+
+    test_computer.cpu.run(width,height,depth)
+
+    simplex_out = 1 - np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
+    locations_out = np.transpose(np.nonzero(simplex_out))
+    return locations_out
+
+'''def cloud_layer_gen(model, n, s, y, size=1, density=0, min_height=20, max_height=40, cloud_height=30,
                     dissipation_rate=.1):
     for x in xrange(-n, n + 1, s):
         for z in xrange(-n, n + 1, s):
@@ -69,7 +139,7 @@ def cloud_layer_gen(model, n, s, y, size=1, density=0, min_height=20, max_height
             for h in xrange(min_height, max_height):
                 if noise.noise3d(x / (10.0 * size), z / (10.0 * size), h / (3.0 * size)) > density + abs(
                                 h - cloud_height) * dissipation_rate:
-                    model.add_block((x, h, z), 'cloud', immediate=False)
+                    model.add_block((x, h, z), 'cloud', immediate=False)'''
 
 
 def foam_gen(model, n, s, y, height=40, size=1, density=0):  # 0 is half density, 1 is empty, -1 is full

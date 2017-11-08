@@ -76,18 +76,20 @@ class TestBiomeGenerators(unittest.TestCase):
 
     def testStoneContainer(self):
         mockmod = MockModel()
-        biogen.stone_container_gen(mockmod, 5, 1, 5, height=3)
+        mockmod.batch_blocks(biogen.stone_container_gen( 100, 100, 100), 'grass')
         mockmod.show_cloud()
 
     def testCloudLayerGen(self):
         mockmod = MockModel()
-        biogen.cloud_layer_gen(mockmod,100, 1, None)
+        mockmod.batch_blocks(biogen.cloud_layer_gen(100, 100, 100, 0.02, 0.0, .1), 'grass')
         mockmod.show_cloud()
 
     def testFoamGen(self):
         mockmod = MockModel()
-        biogen.foam_gen(mockmod, 100, 1, 0)
+        mockmod.batch_blocks(biogen.cloud_layer_gen(100, 100, 100, 0.02, 0.0, 0), 'grass')
         mockmod.show_cloud()
 
     def testCaveDig(self):
-        self.fail()
+        mockmod = MockModel()
+        mockmod.batch_blocks(biogen.inverse_cloud_layer_gen(100, 100, 100, 0.02, 0.5, .05), 'grass')
+        mockmod.show_cloud()
