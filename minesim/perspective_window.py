@@ -11,23 +11,30 @@ import os
 import logging
 
 import sys
+
+from .glsl_window import GLSLWindow, MyPyQtSlot
+
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 l = logging.getLogger('perspective_window')
 l.setLevel(logging.DEBUG)
 
-class PerspectiveWindow(QtOpenGL.QGLWidget):
+class PerspectiveWindow(GLSLWindow):
     def __init__(self):
-        fmt = QtOpenGL.QGLFormat()
-        fmt.setVersion(4, 3)
-        fmt.setProfile(QtOpenGL.QGLFormat.CoreProfile)
-        fmt.setSampleBuffers(True)
-        self.vao_instances = dict()
-        super(PerspectiveWindow, self).__init__(fmt)
+        #super(GLSLWindow, self).__init__(self.fmt)
+        #fmt = QtOpenGL.QGLFormat()
+        #fmt.setVersion(4, 3)
+        #fmt.setProfile(QtOpenGL.QGLFormat.CoreProfile)
+        #fmt.setSampleBuffers(True)
 
+        super(PerspectiveWindow, self).__init__(
+            vertex_shader_file=os.path.dirname(__file__)+os.sep+'shaders'+os.sep+'perspective_vertex.glsl',
+            fragment_shader_file=os.path.dirname(__file__)+os.sep+'shaders'+os.sep+'perspective_fragment.glsl',
+            uniform_dict={}
+        )
+
+    @MyPyQtSlot("bool")
     def paintGL(self):
-        self.ctx.viewport = (0, 0, self.width(), self.height())
-        #self.ctx.wireframe = True
-        self.ratio = self.width() / self.height()
+        super(PerspectiveWindow, self).paintGL()
         self.p_mat = mm.perspective_mat(z_near=0.1, z_far=1000.0,
                                         ratio=self.ratio,
                                         fov_y=self.fov_y)
@@ -36,28 +43,19 @@ class PerspectiveWindow(QtOpenGL.QGLWidget):
             tuple(((self.stored_mview)*np.transpose(self.p_mat)).flatten().tolist()[0])
         self.ctx.clear(0.9, 0.9, 0.9)
         for filename in self.vao_instances:
-            self.vao_instances[filename].vao.render(mode=ModernGL.TRIANGLES,instances=self.vao_instances[filename].num_instances)
+            self.vao_instances[filename].vao.render(mode=ModernGL.LINES,instances=self.vao_instances[filename].num_instances)
         self.ctx.finish()
 
-    def initializeGL(self):
-        self.ctx = ModernGL.create_context()
+    @MyPyQtSlot("bool")
+    def initializeGL(self,
+                     new_vertex_shader_file=None,
+                     new_fragment_shader_file=None,
+                     new_uniform_dict = None):
+        super(PerspectiveWindow, self).initializeGL()
+
+        self.vao_instances = dict()
 
         self.ctx.enable(ModernGL.DEPTH_TEST) #ignore assimp or moderngl getting normals wrong
-
-        script_dir = os.path.dirname(__file__)
-
-        shader_file = open(script_dir + "/shaders/perspective_vertex.glsl")
-        vertex_shader = shader_file.read()
-        shader_file.close()
-
-        shader_file = open(script_dir + "/shaders/perspective_fragment.glsl")
-        fragment_shader = shader_file.read()
-        shader_file.close()
-
-        self.prog = self.ctx.program([
-            self.ctx.vertex_shader(vertex_shader),
-            self.ctx.fragment_shader(fragment_shader),
-        ])
 
         self.cam_quat = mm.Quaternion.from_axis(1,0,0,m.pi/4.0)
         self.cam_pos = np.array([3.0,3.0,3.0])

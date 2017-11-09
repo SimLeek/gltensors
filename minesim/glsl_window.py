@@ -44,15 +44,15 @@ class GLSLWindow(QtOpenGL.QGLWidget):
 
         self.script_dir = os.path.dirname(__file__)
 
-        self.vertex_shader = vertex_shader_file
-        self.fragment_shader = fragment_shader_file
+        self.vertex_shader = os.path.realpath(vertex_shader_file)
+        self.fragment_shader = os.path.realpath(fragment_shader_file)
 
 
 
         self.uniform_dict = uniform_dict
 
     def read_shader(self, shader_filename):
-        shader_file = open(self.script_dir + '\\' + shader_filename)
+        shader_file = open(shader_filename)
         shader_text = shader_file.read()
         shader_file.close()
         return shader_text

@@ -1,6 +1,7 @@
 import unittest as ut
 import minesim.GLSLComputer as glcpu
 from minesim.glsl_util import glsl_import_filter
+import os
 
 import numpy as np
 np.set_printoptions(threshold=np.nan)
@@ -10,11 +11,11 @@ class TestGLSLCPU(ut.TestCase):
         self.maxDiff = None
 
     def testSimplexNoise(self):
-        shader_file = open("../minesim/shaders/compute2DNoise.glsl")
+        shader_file = open(os.path.abspath(os.sep.join(['..','minesim','shaders','compute2DNoise.glsl'])))
         simplex_shader = shader_file.read()
         shader_file.close()
 
-        simplex_shader = glsl_import_filter(simplex_shader, "../minesim/shaders/")
+        simplex_shader = glsl_import_filter(simplex_shader, os.path.abspath(os.sep.join(['..','minesim','shaders'])))
 
         test_computer = glcpu.GLSLComputer(simplex_shader,
                                      width=20, height=20, depth=20,
@@ -28,5 +29,5 @@ class TestGLSLCPU(ut.TestCase):
 
         simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((20, 20, 20))
 
-        f = open("glsl_cpu_simplex_noise_expected")
+        f = open(os.sep.join(["data","glsl_cpu_simplex_noise_expected"]))
         self.assertMultiLineEqual(f.read(), repr(simplex_out))
