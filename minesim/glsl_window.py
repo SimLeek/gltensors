@@ -81,5 +81,6 @@ class GLSLWindow(QtOpenGL.QGLWidget):
             self.ctx.fragment_shader(fragment_shader)
         ])
 
-        for name, value in self.uniform_dict.items():
-            self.prog.uniforms[name].value = value
+        if self.uniform_dict is not None:
+            for name, value in self.uniform_dict.items():
+                self.prog.uniforms[name].value = value

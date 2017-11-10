@@ -181,7 +181,7 @@ def id_mat( dtype = None):
 #  (local translation): kept_matrix = perspective_mat*axis_angle_mat(kept quat)*translate_mat
 #  (global translation): kept_matrix = perspective_mat*axis_angle_mat(inv to global)*translate_mat*axis_angle_mats
 
-# don't really need this until you're animating 3D models with lots of bones.
+# todo: don't really need this until you're animating 3D models with lots of bones.
 glsl = \
 """
 #version 150
