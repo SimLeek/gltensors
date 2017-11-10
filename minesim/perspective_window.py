@@ -38,6 +38,8 @@ class PerspectiveWindow(GLSLWindow):
                                                 fragment_shader_file = os.path.dirname(os.path.realpath(__file__))+os.sep+'shaders'+os.sep+'perspective_fragment.glsl',
                                                 uniform_dict = None
         )
+        self.vao = None
+        self.vbo = None
 
     @MyPyQtSlot("bool")
     def initializeGL(self,
@@ -64,16 +66,14 @@ class PerspectiveWindow(GLSLWindow):
         self.model_view_perspective_matrix.value = \
             tuple(((self.stored_mview) * np.transpose(self.p_mat)).flatten().tolist()[0])
 
-        grid = []
+        self.vbo = self.ctx.buffer(self.vbo_data)
+        self.vao = self.ctx.simple_vertex_array(self.prog, self.vbo, self.vao_input_list)
 
-        for i in range(65):
-            grid.append([i - 32, -32.0, 0.0, i - 32, 32.0, 0.0])
-            grid.append([-32.0, i - 32, 0.0, 32.0, i - 32, 0.0])
+    def setVBO(self, data):
+        self.vbo_data = data
 
-        grid = np.array(grid)
-
-        self.vbo = self.ctx.buffer(grid.astype('f4').tobytes())
-        self.vao = self.ctx.simple_vertex_array(self.prog, self.vbo, ['vert'])
+    def setVAO(self, input_list=('vert',)):
+        self.vao_input_list = input_list
 
     @MyPyQtSlot("bool")
     def paintGL(self):

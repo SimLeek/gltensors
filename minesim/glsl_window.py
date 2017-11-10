@@ -34,9 +34,9 @@ class GLSLWindow(QtOpenGL.QGLWidget):
     fmt.setSampleBuffers(True)
 
     def __init__(self,
-                 vertex_shader_file,
-                 fragment_shader_file,
-                 uniform_dict  # type: Dict[str, Any]
+                 vertex_shader_file=None,
+                 fragment_shader_file=None,
+                 uniform_dict=None  # type: Dict[str, Any]
                  ):
         super(GLSLWindow, self).__init__(self.fmt)
 
@@ -44,8 +44,14 @@ class GLSLWindow(QtOpenGL.QGLWidget):
 
         self.script_dir = os.path.dirname(__file__)
 
-        self.vertex_shader = os.path.realpath(vertex_shader_file)
-        self.fragment_shader = os.path.realpath(fragment_shader_file)
+        if vertex_shader_file is not None:
+            self.vertex_shader = os.path.realpath(vertex_shader_file)
+        else:
+            self.vertex_shader = None
+        if fragment_shader_file is not None:
+            self.fragment_shader = os.path.realpath(fragment_shader_file)
+        else:
+            self.fragment_shader = None
 
 
 
@@ -73,14 +79,17 @@ class GLSLWindow(QtOpenGL.QGLWidget):
             self.fragment_shader = new_fragment_shader_file
         if new_vertex_shader_file:
             self.vertex_shader = new_vertex_shader_file
-        vertex_shader = self.read_shader(self.vertex_shader)
-        fragment_shader = self.read_shader(self.fragment_shader)
+        if self.vertex_shader is not None:
+            vertex_shader = self.read_shader(self.vertex_shader)
+        if self.fragment_shader is not None:
+            fragment_shader = self.read_shader(self.fragment_shader)
 
-        self.prog = self.ctx.program([
-            self.ctx.vertex_shader(vertex_shader),
-            self.ctx.fragment_shader(fragment_shader)
-        ])
+        if self.vertex_shader is not None and self.fragment_shader is not None:
+            self.prog = self.ctx.program([
+                self.ctx.vertex_shader(vertex_shader),
+                self.ctx.fragment_shader(fragment_shader)
+            ])
 
-        if self.uniform_dict is not None:
-            for name, value in self.uniform_dict.items():
-                self.prog.uniforms[name].value = value
+            if self.uniform_dict is not None:
+                for name, value in self.uniform_dict.items():
+                    self.prog.uniforms[name].value = value
