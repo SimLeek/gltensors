@@ -1,5 +1,4 @@
 import ModernGL
-from ModernGL.ext.examples import run_example
 import numpy as np
 import minesim.matmult as mm
 import math as m
@@ -54,7 +53,8 @@ class PerspectiveWindow(GLSLWindow):
         self.cam_quat = mm.Quaternion.from_axis(m.sqrt(2), m.sqrt(m.sqrt(2)),  m.sqrt(m.sqrt(2)), -m.pi / 4.0)
         self.cam_pos = np.array([3.0, 3.0, 3.0])
         self.ratio = self.width() / self.height()
-        self.fov_y = 1.10714872
+        #self.fov_y = 1.10714872
+        self.fov_y = m.pi/2.5# todo: limit fov to w/in 1% of 90 deg, 180 deg at most
         self.p_mat = mm.perspective_mat(z_near=0.1, z_far=1000.0,
                                         ratio=self.ratio,
                                         fov_y=self.fov_y)

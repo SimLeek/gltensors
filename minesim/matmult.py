@@ -164,7 +164,7 @@ def perspective_mat(z_near, z_far, fov_y, ratio, dtype = None):  # type: (...)->
     return np.matrix([
         [x_mul, 0, 0, 0],
         [0, y_mul, 0, 0],
-        [0, 0, -1, z_mul],
+        [0, 0, f_mul, z_mul],
         [0, 0, -1, 0]
     ], dtype)
 
