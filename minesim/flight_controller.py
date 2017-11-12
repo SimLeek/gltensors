@@ -21,7 +21,10 @@ from PyQt5 import QtCore
 from PyQt5.QtGui import QCursor
 
 class FlightController(UpdatingWindow, PerspectiveWindow):
-    def __init__(self, flight_keys = None, flight_speed = 1, *args, **kw):
+    def __init__(self, flight_keys = None, flight_speed = 1,
+                 vertex_shader_file=PerspectiveWindow.shader_vertex_perspective,
+                 fragment_shader_file=PerspectiveWindow.shader_fragment_black_and_white,
+                 *args, **kw):
         self.flight_keys = flight_keys
         if self.flight_keys == None:
             self.flight_keys = dict()
@@ -33,7 +36,9 @@ class FlightController(UpdatingWindow, PerspectiveWindow):
 
         self.flight_speed = flight_speed
 
-        super(FlightController, self).__init__()
+        super(FlightController, self).__init__(vertex_shader_file=vertex_shader_file,
+                                                fragment_shader_file=fragment_shader_file,
+                                               **kw)
 
         self.register_updaters(self.flight_update)
 
@@ -194,6 +199,7 @@ if __name__ == '__main__':
     from tests.data.perspectiveTesting import setupForTesting
     app = QtWidgets.QApplication([])
     window = FlightController()
+    window.wireframe = True
     setupForTesting(window)
     window.move(QtWidgets.QDesktopWidget().rect().center() - window.rect().center())
     window.show()

@@ -7,7 +7,9 @@ class TestPerspectiveWindow(ut.TestCase):
     def testRuns(self):
         app = QtWidgets.QApplication([])
 
-        win = persp.PerspectiveWindow()
+        win = persp.PerspectiveWindow(vertex_shader_file=persp.GLSLWindow.shader_vertex_perspective,
+                 fragment_shader_file=persp.GLSLWindow.shader_fragment_black_and_white)
+        win.wireframe = True
         setupForTesting(win)
 
         win.move(QtWidgets.QDesktopWidget().rect().center() - win.rect().center())

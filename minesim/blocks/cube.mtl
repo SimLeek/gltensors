@@ -1,11 +1,11 @@
-# Blender MTL File: 'cube.blend'
-# Mtl Count: 1
+# Blender MTL File: 'grass block.blend'
+# Material Count: 1
 
-newmtl Mtl.002
-Ns 76.470588
+newmtl Material.003
+Ns 0.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.071895 0.071895 0.071895
+Kd 1.000000 0.595975 0.038791
+Ks 0.035904 0.021127 0.003118
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000

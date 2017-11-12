@@ -2,7 +2,7 @@ import minesim.glsl_window as glwin
 from PyQt5 import QtCore, QtOpenGL
 
 class UpdatingWindow(glwin.GLSLWindow):
-    def __init__(self, refresh_rate_ms = int(1000 / 60)):
+    def __init__(self, refresh_rate_ms = int(1000 / 60), **kw):
         self.restraining_mouse = True
         self.update_timer = QtCore.QTimer()
         self.update_timer.timeout.connect(self.update_event)

@@ -28,6 +28,15 @@ def MyPyQtSlot(*args):
     return slotdecorator
 
 class GLSLWindow(QtOpenGL.QGLWidget):
+    shader_fragment_black_and_white = os.path.dirname(os.path.realpath(__file__))\
+                                      + os.sep + 'shaders' + os.sep + 'black_and_white_fragment.glsl'
+    shader_fragment_textured = os.path.dirname(os.path.realpath(__file__))\
+                               + os.sep + 'shaders' + os.sep + 'texture_fragment.glsl'
+
+    shader_vertex_perspective = os.path.dirname(os.path.realpath(__file__))\
+                               + os.sep + 'shaders' + os.sep + 'perspective_vertex.glsl'
+
+
     fmt = QtOpenGL.QGLFormat()
     fmt.setVersion(4,3)
     fmt.setProfile(QtOpenGL.QGLFormat.CoreProfile)

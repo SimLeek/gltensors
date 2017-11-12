@@ -30,11 +30,20 @@ def MyPyQtSlot(*args):
 
     return slotdecorator
 
-class PerspectiveWindow(GLSLWindow):
 
-    def __init__(self):
-        super(PerspectiveWindow, self).__init__(vertex_shader_file = os.path.dirname(os.path.realpath(__file__))+os.sep+'shaders'+os.sep+'perspective_vertex.glsl',
-                                                fragment_shader_file = os.path.dirname(os.path.realpath(__file__))+os.sep+'shaders'+os.sep+'black_and_white_fragment.glsl',
+
+class PerspectiveWindow(GLSLWindow):
+    wireframe = False
+
+
+    def __init__(self,
+                 vertex_shader_file=GLSLWindow.shader_vertex_perspective,
+                 fragment_shader_file=GLSLWindow.shader_fragment_textured,
+                 uniform_dict=None,
+                 **kw
+                 ):
+        super(PerspectiveWindow, self).__init__(vertex_shader_file = vertex_shader_file,
+                                                fragment_shader_file = fragment_shader_file,
                                                 uniform_dict = None
         )
         self.vao = None
@@ -49,12 +58,13 @@ class PerspectiveWindow(GLSLWindow):
             new_vertex_shader_file=None,
             new_fragment_shader_file=None,
             new_uniform_dict = None)
+        self.ctx.enable(ModernGL.DEPTH_TEST)
 
         self.cam_quat = mm.Quaternion.from_axis(m.sqrt(2), m.sqrt(m.sqrt(2)),  m.sqrt(m.sqrt(2)), -m.pi / 4.0)
         self.cam_pos = np.array([3.0, 3.0, 3.0])
         self.ratio = self.width() / self.height()
         #self.fov_y = 1.10714872
-        self.fov_y = m.pi/2.5# todo: limit fov to w/in 1% of 90 deg, 180 deg at most
+        self.fov_y = m.pi/3# todo: limit fov to w/in 1% of 90 deg, 180 deg at most
         self.p_mat = mm.perspective_mat(z_near=0.1, z_far=1000.0,
                                         ratio=self.ratio,
                                         fov_y=self.fov_y)
@@ -80,6 +90,7 @@ class PerspectiveWindow(GLSLWindow):
         self.ctx.viewport = (0,0, self.width(), self.height())
         self.ctx.clear(1.0, 1.0, 1.0)
 
+
         self.p_mat = mm.perspective_mat(z_near=0.1, z_far=1000.0,
                                         ratio=self.ratio,
                                         fov_y=self.fov_y)
@@ -87,5 +98,9 @@ class PerspectiveWindow(GLSLWindow):
         self.model_view_perspective_matrix.value = \
             tuple(((self.stored_mview) * np.transpose(self.p_mat)).flatten().tolist()[0])
 
-        self.vao.render(ModernGL.LINES)
+        if self.wireframe:
+            self.vao.render(ModernGL.LINES)
+        else:
+            self.vao.render(ModernGL.TRIANGLES)
+
 
