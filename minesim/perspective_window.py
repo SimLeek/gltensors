@@ -34,7 +34,7 @@ class PerspectiveWindow(GLSLWindow):
 
     def __init__(self):
         super(PerspectiveWindow, self).__init__(vertex_shader_file = os.path.dirname(os.path.realpath(__file__))+os.sep+'shaders'+os.sep+'perspective_vertex.glsl',
-                                                fragment_shader_file = os.path.dirname(os.path.realpath(__file__))+os.sep+'shaders'+os.sep+'perspective_fragment.glsl',
+                                                fragment_shader_file = os.path.dirname(os.path.realpath(__file__))+os.sep+'shaders'+os.sep+'black_and_white_fragment.glsl',
                                                 uniform_dict = None
         )
         self.vao = None

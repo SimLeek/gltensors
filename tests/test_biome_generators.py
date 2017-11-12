@@ -69,27 +69,55 @@ class MockModel(object):
 class TestBiomeGenerators(unittest.TestCase):
     # todo: change this to a non-interactive test, like glsl_compute tests
     # todo: add interactive tests that require y/n == y to pass
+    def testFullBiomeGen(self):
+        plains = biogen.plains_gen( 500, 500, 100, 30, 50, turbulence=0.01).astype(np.bool_)
+        min_h = 0
+        max_h = 35
+        h = max_h-min_h
+        dissipation = 0.05
+        # us, but not them boolean operators to remove boolean arrays from other boolean arrays
+        # if I run into long strings of operators like these, consider moving back to glsl.
+        cave_caves = biogen.cloud_layer_gen(500, 500, h, 0.02, 0.0, 0) & ~biogen.cloud_layer_gen(500, 500, h, 0.1, 0.0, 0)
+        cave_caves = biogen.cloud_layer_gen(500, 500, h, 0.005, 0.0, dissipation) & ~cave_caves
+        plains[0:500, 0:500, min_h:max_h] = plains[0:500, 0:500, min_h:max_h] & ~cave_caves
+        visible_plains = biogen.restrict_visible(plains, plains, show_bounds=True)
+        visible_locations = biogen.get_locations(visible_plains)
+        mockmod = MockModel()
+        mockmod.batch_blocks(visible_locations, 'grass')
+        mockmod.show_cloud()
+    def testVisibleGen(self):
+        plains = biogen.cloud_layer_gen(100, 100, 50, 0.02, 0.0, 0)
+        visible_plains = biogen.restrict_visible(plains, plains, show_bounds=True)
+        visible_locations = biogen.get_locations(visible_plains)
+        mockmod = MockModel()
+        mockmod.batch_blocks(visible_locations, 'grass')
+        mockmod.show_cloud()
+
     def testPlainsGen(self):
         mockmod = MockModel()
-        mockmod.batch_blocks(biogen.plains_gen( 100, 100, 100, 30, 50, turbulence=0.01), 'grass')
+        mockmod.batch_blocks(
+            biogen.get_locations(
+                biogen.plains_gen( 100, 100, 100, 30, 50, turbulence=0.01)
+            ), 'grass'
+        )
         mockmod.show_cloud()
 
     def testStoneContainer(self):
         mockmod = MockModel()
-        mockmod.batch_blocks(biogen.stone_container_gen( 100, 100, 100), 'grass')
+        mockmod.batch_blocks(biogen.get_locations(biogen.stone_container_gen( 100, 100, 100)), 'grass')
         mockmod.show_cloud()
 
     def testCloudLayerGen(self):
         mockmod = MockModel()
-        mockmod.batch_blocks(biogen.cloud_layer_gen(100, 100, 100, 0.02, 0.0, .1), 'grass')
+        mockmod.batch_blocks(biogen.get_locations(biogen.cloud_layer_gen(100, 100, 100, 0.02, 0.0, .1)), 'grass')
         mockmod.show_cloud()
 
     def testFoamGen(self):
         mockmod = MockModel()
-        mockmod.batch_blocks(biogen.cloud_layer_gen(100, 100, 100, 0.02, 0.0, 0), 'grass')
+        mockmod.batch_blocks(biogen.get_locations(biogen.cloud_layer_gen(100, 100, 100, 0.02, 0.0, 0)), 'grass')
         mockmod.show_cloud()
 
     def testCaveDig(self):
         mockmod = MockModel()
-        mockmod.batch_blocks(biogen.inverse_cloud_layer_gen(100, 100, 100, 0.02, 0.5, .05), 'grass')
+        mockmod.batch_blocks(biogen.get_locations(biogen.inverse_cloud_layer_gen(100, 100, 100, 0.02, 0.5, .05)), 'grass')
         mockmod.show_cloud()
