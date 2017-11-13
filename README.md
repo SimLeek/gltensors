@@ -1,6 +1,6 @@
 # MineSim
 
-![example image](https://i.imgur.com/AjOOkhd.png)
+![example image](https://i.imgur.com/yz3HOLv.png)
 
 ## Setup
 

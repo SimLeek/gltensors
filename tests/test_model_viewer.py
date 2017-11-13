@@ -12,17 +12,17 @@ class TestPerspectiveWindow(ut.TestCase):
         # window.load_model_file_into_cache(os.path.dirname(os.path.realpath(__file__))\
         #                           + os.sep + 'blocks' + os.sep + 'cube.obj')
 
-        plains = biogen.plains_gen(500, 500, 100, 30, 50, turbulence=0.01).astype(np.bool_)
+        plains = biogen.plains_gen(100, 100, 100, 30, 50, turbulence=0.01).astype(np.bool_)
         min_h = 0
         max_h = 35
         h = max_h - min_h
         dissipation = 0.05
         # us, but not them boolean operators to remove boolean arrays from other boolean arrays
         # if I run into long strings of operators like these, consider moving back to glsl.
-        cave_caves = biogen.cloud_layer_gen(500, 500, h, 0.02, 0.0, 0) & ~biogen.cloud_layer_gen(500, 500, h, 0.1, 0.0,
+        cave_caves = biogen.cloud_layer_gen(100, 100, h, 0.02, 0.0, 0) & ~biogen.cloud_layer_gen(100, 100, h, 0.1, 0.0,
                                                                                                  0)
-        cave_caves = biogen.cloud_layer_gen(500, 500, h, 0.005, 0.0, dissipation) & ~cave_caves
-        plains[0:500, 0:500, min_h:max_h] = plains[0:500, 0:500, min_h:max_h] & ~cave_caves
+        cave_caves = biogen.cloud_layer_gen(100, 100, h, 0.005, 0.0, dissipation) & ~cave_caves
+        plains[0:100, 0:100, min_h:max_h] = plains[0:100, 0:100, min_h:max_h] & ~cave_caves
         visible_plains = biogen.restrict_visible(plains, plains, show_bounds=True)
         visible_locations = biogen.get_locations(visible_plains)
 

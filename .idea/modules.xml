@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MineSim.iml" filepath="$PROJECT_DIR$/.idea/MineSim.iml" />
+      <module fileurl="file://C:\Users\joshm\PycharmProjects\MineSim\.idea\MineSim.iml" filepath="C:\Users\joshm\PycharmProjects\MineSim\.idea\MineSim.iml" />
     </modules>
   </component>
 </project>
