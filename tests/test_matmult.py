@@ -7,4 +7,6 @@ class TestGLSLCPU(ut.TestCase):
     def setUp(self):
         self.maxDiff = None
 
-    def test_id_mat(self):
+    #todo: actually define some tests here.
+
+    #def test_id_mat(self):

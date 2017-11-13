@@ -192,20 +192,3 @@ class FlightController(UpdatingWindow, PerspectiveWindow):
             self.center_x = self.geometry().x() + int(self.width() / 2)
             self.center_y = self.geometry().y() + int(self.height() / 2)
             QCursor.setPos(self.center_x, self.center_y)
-
-if __name__ == '__main__':
-    from PyQt5 import QtWidgets
-    import os
-    from tests.data.perspectiveTesting import setupForTesting
-    app = QtWidgets.QApplication([])
-    window = FlightController()
-    window.wireframe = True
-    setupForTesting(window)
-    window.move(QtWidgets.QDesktopWidget().rect().center() - window.rect().center())
-    window.show()
-
-    script_dir = os.path.dirname(__file__)
-
-    #window.load_models(script_dir+"/minesim/blocks/cube.obj")
-
-    app.exec_()
