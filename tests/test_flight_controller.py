@@ -1,6 +1,6 @@
 import unittest as ut
 from PyQt5 import QtWidgets
-import minesim.flight_controller as flyer
+import gltensors.flight_controller as flyer
 from .data.perspectiveTesting import setupForTesting
 import os
 

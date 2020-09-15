@@ -1,10 +1,11 @@
 from PyQt5 import QtOpenGL, QtCore
 from functools import wraps
-import ModernGL
+import moderngl
 import os
 import traceback
 import types
-import minesim.matmult as mm
+import gltensors.matmult as mm
+import warnings
 
 if False:
     import numpy as np
@@ -49,7 +50,7 @@ class GLSLWindow(QtOpenGL.QGLWidget):
                  ):
         super(GLSLWindow, self).__init__(self.fmt)
 
-        self.ctx = None  # type: ModernGL.Context
+        self.ctx = None  # type: moderngl.Context
 
         self.script_dir = os.path.dirname(__file__)
 
@@ -82,7 +83,7 @@ class GLSLWindow(QtOpenGL.QGLWidget):
                      new_vertex_shader_file=None,
                      new_fragment_shader_file=None,
                      new_uniform_dict = None):
-        self.ctx = ModernGL.create_context()
+        self.ctx = moderngl.create_context()
 
         if new_fragment_shader_file:
             self.fragment_shader = new_fragment_shader_file
@@ -94,11 +95,15 @@ class GLSLWindow(QtOpenGL.QGLWidget):
             fragment_shader = self.read_shader(self.fragment_shader)
 
         if self.vertex_shader is not None and self.fragment_shader is not None:
-            self.prog = self.ctx.program([
-                self.ctx.vertex_shader(vertex_shader),
-                self.ctx.fragment_shader(fragment_shader)
-            ])
+            self.prog = self.ctx.program(
+                vertex_shader=vertex_shader,
+                fragment_shader=fragment_shader
+            )
 
             if self.uniform_dict is not None:
                 for name, value in self.uniform_dict.items():
-                    self.prog.uniforms[name].value = value
+                    if name in self.prog:
+                        self.prog[name].value = value
+                    else:
+                        warnings.warn(f'{name} not in shaders')
+

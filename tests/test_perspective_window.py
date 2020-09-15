@@ -1,6 +1,6 @@
 import unittest as ut
 from PyQt5 import QtWidgets
-import minesim.perspective_window as persp
+import gltensors.perspective_window as persp
 from .data.perspectiveTesting import setupForTesting
 
 class TestPerspectiveWindow(ut.TestCase):

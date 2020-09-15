@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MineSim.iml" filepath="$PROJECT_DIR$/.idea/MineSim.iml" />
-      <module fileurl="file://C:\Users\joshm\PycharmProjects\MineSim\.idea\MineSim.iml" filepath="C:\Users\joshm\PycharmProjects\MineSim\.idea\MineSim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GLTensors.iml" filepath="$PROJECT_DIR$/.idea/GLTensors.iml" />
     </modules>
   </component>
 </project>

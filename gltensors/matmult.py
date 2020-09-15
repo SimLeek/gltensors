@@ -2,7 +2,7 @@ import numpy as np
 import math as m
 
 def translate_mat(x, y, z, dtype=None):
-    return np.matrix(
+    return np.asarray(
         [[1, 0, 0, x],
          [0, 1, 0, y],
          [0, 0, 1, z],
@@ -11,7 +11,7 @@ def translate_mat(x, y, z, dtype=None):
     )
 
 def scale_mat(x, y, z, dtype=None):
-    return np.matrix(
+    return np.asarray(
         [[x, 0, 0, 0],
          [0, y, 0, 0],
          [0, 0, z, 0],
@@ -110,7 +110,7 @@ def _smol_quat_mat(q, dtype=None): # total from angle: 2 trig, 2 divisions (=1.3
         [_2xz - _2yw, _2yz + _2xw, 1 - _2x2 - _2y2],
     ], dtype)'''
 
-    return np.matrix([
+    return np.asarray([
             [1-_2y2-_2z2,  _2xy + _2zw,    _2xz - _2yw],
             [_2xy - _2zw,   1-_2x2-_2z2,    _2yz + _2xw],
             [_2xz + _2yw,   _2yz - _2xw,    1-_2x2-_2y2],
@@ -129,7 +129,7 @@ def quat_mat(q, dtype=None): # total from angle: 2 trig, 2 divisions (=1.33 mult
     _2yw = _2y*q.w
     _2yz = _2y*q.z
     _2zw = _2z*q.w
-    return np.matrix([
+    return np.asarray([
         [1-_2y2-_2z2,  _2xy-_2zw,    _2xz+_2yw, 0],
         [_2xy+_2zw,   1-_2x2-_2z2,    _2yz-_2xw, 0],
         [_2xz-_2yw,   _2yz+_2xw,    1-_2x2-_2y2, 0],
@@ -155,13 +155,13 @@ def scale_rot_trans_mat(xs, ys, zs, xt, yt, zt, xv,yv,zv,angle, dtype=None):
 def rot_trans_mat(xt, yt, zt, xv,yv,zv,angle, dtype=None):
     return quat_mat(Quaternion.from_axis(xv,yv,zv,angle), dtype) * translate_mat(xt,yt,zt,dtype)
 
-def perspective_mat(z_near, z_far, fov_y, ratio, dtype = None):  # type: (...)->np.matrix
+def perspective_mat(z_near, z_far, fov_y, ratio, dtype = None):  # type: (...)->np.ndarray
     z_mul = (-2.0*z_near*z_far) / (z_far - z_near)
     y_mul = -1.0 * m.tan(fov_y)
     x_mul = y_mul / ratio
     f_mul = -(z_far+z_near)/(z_far-z_near)
 
-    return np.matrix([
+    return np.asarray([
         [x_mul, 0, 0, 0],
         [0, y_mul, 0, 0],
         [0, 0, f_mul, z_mul],
@@ -169,7 +169,7 @@ def perspective_mat(z_near, z_far, fov_y, ratio, dtype = None):  # type: (...)->
     ], dtype)
 
 def id_mat( dtype = None):
-    return np.matrix([
+    return np.asarray([
         [1, 0, 0, 0],
         [0, 1, 0, 0],
         [0, 0, 1, 0],

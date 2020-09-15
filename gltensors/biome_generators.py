@@ -9,8 +9,8 @@ if sys.version_info[0] >= 3:
     xrange = range
 
 from opensimplex import OpenSimplex
-from minesim.GLSLComputer import *
-from minesim.glsl_util import glsl_import_filter
+from gltensors.GLSLComputer import *
+from gltensors.glsl_util import glsl_import_filter
 
 def read_in_file(*shader_file):
     shader_file = open(script_dir+os.sep+os.sep.join(shader_file))
@@ -42,6 +42,7 @@ def plains_gen(width, height, depth, min_z, max_z, turbulence=1):
     test_computer.cpu.run(width,height,depth)
 
     simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth)) # type: np.ndarray
+    simplex_out = np.copy(simplex_out)
     simplex_out.setflags(write=True)
     return simplex_out
 
@@ -56,6 +57,7 @@ def stone_container_gen(width, height, depth):
     test_computer.cpu.run(width,height,depth)
 
     simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
+    simplex_out = np.copy(simplex_out)
     simplex_out.setflags(write=True)
     return simplex_out
 
@@ -70,6 +72,7 @@ def cloud_layer_gen(width, height, depth, turbulence=1, density = 0.0, dissipati
     test_computer.cpu.run(width,height,depth)
 
     simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
+    simplex_out = np.copy(simplex_out)
     simplex_out.setflags(write=True)
     return simplex_out.astype(np.bool_)
 
@@ -84,6 +87,7 @@ def inverse_cloud_layer_gen(width, height, depth, turbulence=1, density = 0.0, d
     test_computer.cpu.run(width,height,depth)
 
     simplex_out = 1 - np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
+    simplex_out = np.copy(simplex_out)
     simplex_out.setflags(write=True)
     return simplex_out
 
@@ -124,7 +128,7 @@ def restrict_visible(blocking_spaces,  # type: np.ndarray
         buff_visible.read(),
         dtype=np.float32
     ).reshape(blocking_spaces.shape)
-
+    visibility_array = np.copy(visibility_array)
     visibility_array.setflags(write=True)
     return visibility_array
 

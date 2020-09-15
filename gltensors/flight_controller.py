@@ -10,12 +10,12 @@ class FlightControls(Enum):
     up = 7
     down = 8
 
-import minesim.matmult as mm
+import gltensors.matmult as mm
 import math as m
 import numpy as np
 
-from minesim.updating_window import UpdatingWindow
-from minesim.perspective_window import PerspectiveWindow
+from gltensors.updating_window import UpdatingWindow
+from gltensors.perspective_window import PerspectiveWindow
 
 from PyQt5 import QtCore
 from PyQt5.QtGui import QCursor
@@ -176,7 +176,7 @@ class FlightController(UpdatingWindow, PerspectiveWindow):
                     mouse_look_prod = (mouse_look_prod/mouse_norm).tolist()
                 else:
                     mouse_look_prod = mouse_look_prod.tolist()
-                print(norm)
+                #print(norm)
                 angle = norm*(self.fov_y/self.height()/2)
 
                 self.cam_quat = self.cam_quat*mm.Quaternion.from_axis(*mouse_look_prod, angle)

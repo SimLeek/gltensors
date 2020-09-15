@@ -1,7 +1,7 @@
 import unittest as ut
 from PyQt5 import QtWidgets
-from minesim.model_instancer import ModelViewer, model_dir
-import minesim.biome_generators as biogen
+from gltensors.model_instancer import ModelViewer, model_dir
+import gltensors.biome_generators as biogen
 import os
 import numpy as np
 

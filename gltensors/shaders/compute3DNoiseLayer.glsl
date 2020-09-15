@@ -20,7 +20,6 @@ layout (std430, binding = 1) buffer Output {
 //needs to be 1,1,1, unless you know your input is divideable
 layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 void main() {
-     ivec3 resolution = ivec3(width, height, depth);
      ivec3 storePos = ivec3(gl_GlobalInvocationID.xyz);
      uint height_pos = gl_GlobalInvocationID.z;
 

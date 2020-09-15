@@ -1,5 +1,5 @@
 import unittest as ut
-import minesim.glsl_window as glwin
+import gltensors.glsl_window as glwin
 from sys import platform
 from PyQt5 import QtWidgets
 import os

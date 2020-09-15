@@ -1,4 +1,4 @@
-import minesim.glsl_window as glwin
+import gltensors.glsl_window as glwin
 from PyQt5 import QtCore, QtOpenGL
 
 class UpdatingWindow(glwin.GLSLWindow):

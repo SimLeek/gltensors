@@ -1,6 +1,6 @@
 import unittest
 
-import minesim.biome_generators as biogen
+import gltensors.biome_generators as biogen
 
 import numpy as np
 
