@@ -6,9 +6,9 @@ import gltensors.GLSLComputer as glcpu
 
 
 def test_denoise_cpu():
-    d = display(test_image_1, size=(1, 1))
+    d = display(test_image_1, size=(1, 1), fps_limit=240)
 
-    edge_kernel = np.random.randint(0, 256, (3, 3, 3, 3)).astype(dtype=np.float32) / 127.0
+    edge_kernel = -np.random.randint(-127, 127, (3, 3, 3, 3)).astype(dtype=np.float32) / 127.0
 
     kernel_height = kernel_width = 3
     kernel_stride_x = kernel_stride_y = 1
@@ -25,6 +25,7 @@ def test_denoise_cpu():
     buffkd = buffo = None
 
     in_channels = None
+    kd_out_prev = None
 
     while d:
         if d.frames:
@@ -107,10 +108,18 @@ def test_denoise_cpu():
             forward_computer.ctx.finish()
 
             out_img = np.frombuffer(buffo_f.read(), dtype=np.float32).reshape((height, width, in_channels))
-
-            d.update(out_img, 'out img')
+            if np.average(out_img)<0:
+                print("out img -1")
+                d.update(-out_img, 'out img')
+            else:
+                d.update(out_img, 'out img')
 
             out_error = out_img - frame
+
+            buffk_f.release()
+            buffi_f.release()
+            buffo_f.release()
+            forward_computer.ctx.release()
 
             backward_computer = glcpu.GLSLComputer(backward_shader,
                                                    width=width,
@@ -148,15 +157,57 @@ def test_denoise_cpu():
             ind_out = np.frombuffer(buffid.read(), dtype=np.float32).reshape((height, width, in_channels))
             kd_out = np.frombuffer(buffkd.read(), dtype=np.float32).reshape(edge_kernel.shape)
 
-            d.update(out_error, 'out err')
-            d.update(ind_out, 'in err')
-            print(kd_out)
-            edge_kernel -= kd_out / 1.0e7
+            if np.average(out_error)<0:
+                print("out_error -1")
+                d.update(-out_error, 'out err')
+            else:
+                d.update(out_error, 'out err')
 
-            buffk_f.release()
-            buffi_f.release()
-            buffo_f.release()
+            if np.average(ind_out)<0:
+                print("ind_out -1")
+                d.update(-ind_out, 'in err')
+            else:
+                d.update(ind_out, 'in err')
+            #print(kd_out)
+
+            if kd_out_prev is not None:
+                err_vel = np.abs(kd_out - kd_out_prev)
+                err_vel = np.max(err_vel, 1)
+            else:
+                err_vel = np.ones_like(kd_out)
+            kd_out_prev = kd_out
+
+            #print(err_vel)
+            d_half = (np.average(np.abs(kd_out)))
+
+            err_1 = ((kd_out)/d_half)
+            err_clip = np.abs(np.clip(err_1, -.5, .5))
+            err_copy = kd_out.copy()
+            err_copy[err_clip!=.5] = 0
+
+            v_half = (np.average(np.abs(err_vel)))
+
+            err_vel_1 = ((err_vel) / v_half)
+            err_vel_clip = np.abs(np.clip(err_vel_1, -.5, .5))
+            err_vel[err_vel_clip != .5] = 0
+
+            # velocity weighted adagrad.
+            eta = 1.0
+            eta_vel = 1.0e-1
+            err_min_1 = np.where(err_copy!=0, np.divide(np.abs(edge_kernel),np.sqrt(np.abs(err_copy)), where=err_copy!=0), 0)*np.sign(err_copy)
+            err_min_2 = np.where(err_vel != 0, np.divide(np.abs(edge_kernel), np.sqrt(np.abs(err_vel)), where=err_vel != 0), 0) * np.sign(err_vel)
+            print(np.average(err_min_1))
+            err_minus = eta*err_min_1+err_min_2*eta_vel
+            edge_kernel -= err_minus
+
+            #print(err_vel_1)
+            buffi_b.release()
             buffk_b.release()
             buffkd.release()
             buffid.release()
             buffod.release()
+            backward_computer.ctx.release()
+
+
+if __name__ == '__main__':
+    test_denoise_cpu()

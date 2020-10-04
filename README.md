@@ -1,4 +1,4 @@
-# MineSim
+# SmartVulkan
 
 ![example image](https://i.imgur.com/yz3HOLv.png)
 

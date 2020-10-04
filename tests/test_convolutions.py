@@ -1,4 +1,4 @@
-from displayarray import display
+from displayarray import display, read_updates
 import numpy as np
 import itertools
 import math as m
@@ -6,7 +6,7 @@ from typing import List
 import gltensors.GLSLComputer as glcpu
 import os
 from gltensors.glsl_util import glsl_import_filter
-from tests.data import test_image_1, test_image_smol, test_image_smol_smol
+from tests.data import test_image_1, test_image_smol, test_image_smol_smol, test_emoji
 
 
 def center_surround_tensor(ndim,  # type: int
@@ -161,7 +161,7 @@ def test_forward_edge_detect_glsl():
             buffo.release()
 
 
-from gltensors.cpu_equivalents.dense_conv_forward_2d import dense_conv_forward_2d
+from gltensors.cpu_equivalents.dense_conv_forward_2d import dense_conv_forward_2d_fast
 
 
 def test_forward_rgc_cpu():
@@ -265,36 +265,10 @@ def test_backpropogate_diffs():
             buffod.release()
 
 
-from gltensors.cpu_equivalents.dense_conv_2d_backward import dense_conv_backward_2d
+from gltensors.cpu_equivalents.dense_conv_2d_backward import dense_conv_backward_2d_fast
 
 
 def test_backpropogate_diffs_cpu():
-    d = display(test_image_smol, size=(1, 1))
-
-    edge_kernel = np.random.randint(0, 127, midget_rgc(2).shape).astype(dtype=np.float32) / 127.0
-
-    kernel_stride_x = kernel_stride_y = 1
-
-    kernel_padding_x = kernel_padding_y = 1
-    kernel_dilation_x = kernel_dilation_y = 0
-
-    while d:
-        if d.frames:
-            frame = next(iter(d.frames.values()))[0].astype(np.float32)
-            out_error = np.random.randint(0, 127, frame.shape).astype(dtype=np.float32) / 127.0
-
-            d_inp_image, d_kernel = dense_conv_backward_2d(frame,
-                                                           edge_kernel,
-                                                           (kernel_stride_x, kernel_stride_y),
-                                                           (kernel_padding_x, kernel_padding_y),
-                                                           out_error)
-
-            d.update(out_error, 'out err')
-            d.update(d_inp_image / d_inp_image.max(), 'in err')
-            print(d_kernel)
-
-
-def test_denoise_cpu():
     d = display(test_image_smol_smol, size=(1, 1))
 
     edge_kernel = np.random.randint(0, 127, midget_rgc(2).shape).astype(dtype=np.float32) / 127.0
@@ -306,29 +280,92 @@ def test_denoise_cpu():
 
     while d:
         if d.frames:
-            frame = next(iter(d.frames.values()))[0].astype(np.float32)/256.0
-            noise = np.random.randint(0, 127, frame.shape).astype(dtype=np.float32)/256.0
+            frame = next(iter(d.frames.values()))[0].astype(np.float32)
+            frame = frame[np.newaxis, ...]
+            frame = np.swapaxes(frame, 1, 3)
+            d_inp_image = np.zeros_like(frame)
+            out_error = np.random.randint(0, 127, frame.shape).astype(dtype=np.float32) / 127.0
+            d_kernel = np.zeros_like(edge_kernel)
+
+            dense_conv_backward_2d_fast(frame,
+                                        d_inp_image,
+                                        edge_kernel,
+                                        d_kernel,
+                                        out_error,
+                                        (kernel_stride_x, kernel_stride_y),
+                                        (kernel_padding_x, kernel_padding_y),
+                                        )
+            out_error = np.swapaxes(out_error, 1, 3)
+            out_error = out_error[0, ...]
+            d.update(out_error, 'out err')
+
+            d_inp_image = np.swapaxes(d_inp_image, 1, 3)
+            d_inp_image = d_inp_image[0, ...]
+            d.update(d_inp_image / d_inp_image.max(), 'in err')
+            print(d_kernel)
+
+import cv2
+def test_denoise_cpu():
+    d = display(0, size=(1, 1))
+
+    edge_kernel = np.random.randint(0, 127, midget_rgc(2).shape).astype(dtype=np.float32) / 127.0
+
+    kernel_stride_x = kernel_stride_y = 1
+
+    kernel_padding_x = kernel_padding_y = 1
+    kernel_dilation_x = kernel_dilation_y = 0
+
+    while d:
+        if d.frames:
+            frame = next(iter(d.frames.values()))[0].astype(np.float32) / 256.0
+            frame = cv2.resize(frame, dsize=(8,8), interpolation=cv2.INTER_NEAREST )
+            frame = frame[np.newaxis, ...]
+            frame = np.swapaxes(frame, 1, 3)
+            output = np.zeros_like(frame)
+            noise = np.random.randint(0, 127, frame.shape).astype(dtype=np.float32) / 256.0
             noised_frame = frame + noise
+
+
+            dense_conv_forward_2d_fast(noised_frame,
+                                       edge_kernel,
+                                       output,
+                                       (kernel_stride_x, kernel_stride_y),
+                                       (kernel_padding_x, kernel_padding_y))
+
+
+            out_error = output - frame
+            d_inp_image = np.zeros_like(frame)
+            d_kernel = np.zeros_like(edge_kernel)
+
+
+
+            dense_conv_backward_2d_fast(frame,
+                                        d_inp_image,
+                                        edge_kernel,
+                                        d_kernel,
+                                        out_error,
+                                        (kernel_stride_x, kernel_stride_y),
+                                        (kernel_padding_x, kernel_padding_y),
+                                        )
+            frame = np.swapaxes(frame, 1, 3)
+            frame = frame[0, ...]
+            output = np.swapaxes(output, 1, 3)
+            output = output[0, ...]
+            out_error = np.swapaxes(out_error, 1, 3)
+            out_error = out_error[0, ...]
+            d_inp_image = np.swapaxes(d_inp_image, 1, 3)
+            d_inp_image = d_inp_image[0, ...]
+            noised_frame = np.swapaxes(noised_frame, 1, 3)
+            noised_frame = noised_frame[0, ...]
+            d.update(frame, 'mini frame')
             d.update(noised_frame, 'noised frame')
-
-            out_img = dense_conv_forward_2d(noised_frame,
-                                            edge_kernel,
-                                            (kernel_stride_x, kernel_stride_y),
-                                            (kernel_padding_x, kernel_padding_y))
-            d.update(out_img, 'out img')
-
-            out_error = out_img - frame
-            d_inp_image, d_kernel = dense_conv_backward_2d(frame,
-                                                           edge_kernel,
-                                                           (kernel_stride_x, kernel_stride_y),
-                                                           (kernel_padding_x, kernel_padding_y),
-                                                           out_error)
-
+            d.update(output, 'out img')
             d.update(out_error, 'out err')
             d.update(d_inp_image / d_inp_image.max(), 'in err')
             print(d_kernel)
-            edge_kernel -= d_kernel/1.0e4
+            d_half = (np.average(np.abs(d_kernel.copy())))/1e6
+            edge_kernel -= d_kernel * d_half
 
 
 if __name__ == '__main__':
-    test_forward_edge_detect_glsl()
+    test_denoise_cpu()
