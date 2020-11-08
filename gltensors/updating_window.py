@@ -10,7 +10,7 @@ class UpdatingWindow(glwin.GLSLWindow):
 
         self.updaters = []
 
-        super(UpdatingWindow, self).__init__()
+        super(UpdatingWindow, self).__init__(**kw)
 
     def register_updaters(self, command):
         self.updaters.append(command)

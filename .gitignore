@@ -3,3 +3,4 @@
 __pycache__/
 .cache/
 .idea/MineSim.iml
+gltensors.egg-info/

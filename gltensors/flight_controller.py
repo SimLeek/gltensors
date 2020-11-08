@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class FlightControls(Enum):
     forward = 1
     back = 2
@@ -10,18 +11,55 @@ class FlightControls(Enum):
     up = 7
     down = 8
 
+
 import gltensors.matmult as mm
 import math as m
 import numpy as np
 
 from gltensors.updating_window import UpdatingWindow
-from gltensors.perspective_window import PerspectiveWindow
+from gltensors.perspective_window import PerspectiveWindow, VrPerspectiveWindow
 
 from PyQt5 import QtCore
 from PyQt5.QtGui import QCursor
 
-class FlightController(UpdatingWindow, PerspectiveWindow):
-    def __init__(self, flight_keys = None, flight_speed = 1,
+try:
+    from virtualreality.util import driver
+
+    class VrController(UpdatingWindow, VrPerspectiveWindow):
+        def __init__(self,
+                     vertex_shader_file=PerspectiveWindow.shader_vertex_perspective,
+                     fragment_shader_file=PerspectiveWindow.shader_fragment_black_and_white,
+                     *args, **kw):
+            super(VrController, self).__init__(vertex_shader_file=vertex_shader_file,
+                                               fragment_shader_file=fragment_shader_file,
+                                               **kw)
+            self.myDriver = driver.DummyDriverReceiver(57)
+            self.register_updaters(self.vr_update)
+            self.myDriver.start()
+            self.original_quat=mm.Quaternion(-0.29609551923914257, 0.6352982400150031, 0.6521352103614712, 0.28886546544566705)
+            self.original_pose = np.asarray([-36.64364585, -176.81920739,  -79.70142023])
+
+        def vr_update(self):
+            data = self.myDriver.get_pose()
+            hmd = data[:13]
+            cntl1 = data[13 : 13 + 22]
+            cntl2 = data[13 + 22 : 13 + 22 + 22]
+            x, y, z, w, rx, ry, rz = hmd[:7]
+            ry = -ry
+            rx = -rx
+            rz = -rz
+            self.cam_quat = self.original_quat*mm.Quaternion(rx, ry, rz, w)
+            self.cam_pos = self.original_pose + np.asarray([x,y,z])
+
+            if not self.myDriver.alive:
+                self.myDriver.close()
+
+except ImportError:
+    VrController = None
+
+
+class FlightController(UpdatingWindow, VrPerspectiveWindow):
+    def __init__(self, flight_keys=None, flight_speed=1,
                  vertex_shader_file=PerspectiveWindow.shader_vertex_perspective,
                  fragment_shader_file=PerspectiveWindow.shader_fragment_black_and_white,
                  *args, **kw):
@@ -37,7 +75,7 @@ class FlightController(UpdatingWindow, PerspectiveWindow):
         self.flight_speed = flight_speed
 
         super(FlightController, self).__init__(vertex_shader_file=vertex_shader_file,
-                                                fragment_shader_file=fragment_shader_file,
+                                               fragment_shader_file=fragment_shader_file,
                                                **kw)
 
         self.register_updaters(self.flight_update)
@@ -90,7 +128,7 @@ class FlightController(UpdatingWindow, PerspectiveWindow):
     def flight_update(self):
         if FlightControls.forward in self.active_controls:
             look = self.cam_quat.apply(*[0, 0, 1])
-            self.cam_pos+=look
+            self.cam_pos += look
 
         if FlightControls.back in self.active_controls:
             back = self.cam_quat.apply(*[0, 0, -1])
@@ -123,63 +161,44 @@ class FlightController(UpdatingWindow, PerspectiveWindow):
             down = self.cam_quat.apply(*[0, -1, 0])
             self.cam_pos += down
 
-
+        # print(f"cam_pos: {self.cam_pos}")
+        # print(f"cam_quat: {self.cam_quat.x, self.cam_quat.y, self.cam_quat.z, self.cam_quat.w}")
 
     def mouseMoveEvent(self, event):
         if self.restraining_mouse:
             # update global center in case window moved
             # int casting protects from stray .5 from odd screen sizes
-            self.center_x = self.geometry().x() + int(self.width()/2)
-            self.center_y = self.geometry().y() + int(self.height()/2)
+            self.center_x = self.geometry().x() + int(self.width() / 2)
+            self.center_y = self.geometry().y() + int(self.height() / 2)
 
             cursor_pos = event.globalPos()
 
-            if self.center_x == cursor_pos.x() and self.center_y ==cursor_pos.y():
-                return # cursor was re-centered.
+            if self.center_x == cursor_pos.x() and self.center_y == cursor_pos.y():
+                return  # cursor was re-centered.
             else:
 
                 # get & normalize mouse movement
-                move = [int(cursor_pos.x()-self.center_x), int(cursor_pos.y()-self.center_y)]
-
-                # exponentiate for both precise and fast control
-                '''exponent = 1.7
-                divisor = 4.0
-                x_exponent = exponent
-                y_exponent = exponent
-                if abs(move[0] / divisor) > 1:
-                    x_exponent = 1.1
-                if abs(move[1] / divisor) > 1:
-                    y_exponent = 1.1
-
-                move[0] = abs(move[0] / divisor) ** x_exponent if move[0] > 0 else -(
-                abs(move[0] / divisor) ** x_exponent)
-                move[1] = abs(move[1] / divisor) ** y_exponent if move[1] > 0 else -(
-                abs(move[1] / divisor) ** y_exponent)'''
-
-                # protect from large movements when entering
-                '''if abs(move[0])>100 or abs(move[1])>100:
-                    QCursor.setPos(self.center_x, self.center_y)
-                    return'''
+                move = [int(cursor_pos.x() - self.center_x), int(cursor_pos.y() - self.center_y)]
 
                 # copy gpu values
-                look = self.cam_quat.apply(*[0,0,1])
-                #pointer = mm.Quaternion.from_position(move[0],0,move[1]).normalize()
-                norm = m.sqrt(move[0]*move[0]+move[1]*move[1])
-                x_p = -move[0]/norm
+                look = self.cam_quat.apply(*[0, 0, 1])
+                # pointer = mm.Quaternion.from_position(move[0],0,move[1]).normalize()
+                norm = m.sqrt(move[0] * move[0] + move[1] * move[1])
+                x_p = -move[0] / norm
                 y_p = move[1] / norm
-                pointer = self.cam_quat.apply(*[x_p,y_p,0])
+                pointer = self.cam_quat.apply(*[x_p, y_p, 0])
                 # side = self.cam_quat.apply(1,0,0)
 
-                mouse_look_prod = np.cross(look,pointer)
+                mouse_look_prod = np.cross(look, pointer)
                 mouse_norm = np.linalg.norm(mouse_look_prod)
-                if mouse_norm!=0:
-                    mouse_look_prod = (mouse_look_prod/mouse_norm).tolist()
+                if mouse_norm != 0:
+                    mouse_look_prod = (mouse_look_prod / mouse_norm).tolist()
                 else:
                     mouse_look_prod = mouse_look_prod.tolist()
-                #print(norm)
-                angle = norm*(self.fov_y/self.height()/2)
+                # print(norm)
+                angle = norm * (self.fov_y / self.height() / 2)
 
-                self.cam_quat = self.cam_quat*mm.Quaternion.from_axis(*mouse_look_prod, angle)
+                self.cam_quat = self.cam_quat * mm.Quaternion.from_axis(*mouse_look_prod, angle)
                 self.cam_quat.normalize()
 
                 QCursor.setPos(self.center_x, self.center_y)

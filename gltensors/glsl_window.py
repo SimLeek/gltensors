@@ -33,9 +33,13 @@ class GLSLWindow(QtOpenGL.QGLWidget):
                                       + os.sep + 'shaders' + os.sep + 'black_and_white_fragment.glsl'
     shader_fragment_textured = os.path.dirname(os.path.realpath(__file__))\
                                + os.sep + 'shaders' + os.sep + 'texture_fragment.glsl'
+    shader_fragment_textured_vr = os.path.dirname(os.path.realpath(__file__)) \
+                               + os.sep + 'shaders' + os.sep + 'texture_fragment_vr.glsl'
 
     shader_vertex_perspective = os.path.dirname(os.path.realpath(__file__))\
                                + os.sep + 'shaders' + os.sep + 'perspective_vertex.glsl'
+    shader_vertex_perspective_vr = os.path.dirname(os.path.realpath(__file__)) \
+                                + os.sep + 'shaders' + os.sep + 'perspective_vertex_vr.glsl'
 
 
     fmt = QtOpenGL.QGLFormat()
@@ -62,8 +66,6 @@ class GLSLWindow(QtOpenGL.QGLWidget):
             self.fragment_shader = os.path.realpath(fragment_shader_file)
         else:
             self.fragment_shader = None
-
-
 
         self.uniform_dict = uniform_dict
 
