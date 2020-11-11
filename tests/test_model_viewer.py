@@ -50,16 +50,17 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = ModelViewer()
 
-    box = biogen.cloud_layer_gen(200, 200, 100, turbulence=.1).astype(np.bool_)
-
+    box = biogen.cloud_layer_gen(100, 100, 100, turbulence=.1).astype(np.bool_)
+    box[40:60, 40:60, :50] = 0
+    box[40:60, 40:60, 50] = 1
     visible_plains = biogen.restrict_visible(box, box, show_bounds=True)
     visible_locations = biogen.get_locations(visible_plains)
 
     window.load_model_file_into_positions(model_dir + os.sep + 'cube.obj',
                                           visible_locations)
 
-    window.set_pose([-36.64364585, -176.81920739,  -79.70142023,
-                    -0.29609551923914257, 0.6352982400150031, 0.6521352103614712, 0.28886546544566705])
+    window.set_pose([-98.8408158,  -99.12608922, -92.22389428,
+                    -0.658406950671679, -0.24820071143414202, -0.23584931400634193, 0.670277401702866])
 
     window.move(QtWidgets.QDesktopWidget().rect().center() - window.rect().center())
     window.show()

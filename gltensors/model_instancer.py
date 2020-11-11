@@ -10,9 +10,9 @@ from gltensors import model_loader
 import gltensors.GLSLComputer as glcpu
 
 model_dir = os.path.dirname(os.path.realpath(__file__)) + os.sep + 'blocks'
+shader_dir = os.sep.join([os.path.dirname(os.path.realpath(__file__)), '..', 'gltensors', 'shaders'])
 
-
-class ModelViewer(VrController):
+class ModelViewer(FlightController):
     def __init__(self, fragment_shader_file=FlightController.shader_fragment_textured,
                  vertex_shader_file=FlightController.shader_vertex_perspective_vr,
                  *args, **kw):
@@ -65,7 +65,7 @@ class ModelViewer(VrController):
 
         if len(positions)>1:
             shader_file = open(
-                os.path.abspath(os.sep.join(['..', 'gltensors', 'shaders', 'mesh_pack_shader.glsl'])))
+                os.path.abspath(os.sep.join([shader_dir, 'mesh_pack_shader.glsl'])))
             mesh_pack_shader = shader_file.read()
             shader_file.close()
             mesh_packer = glcpu.GLSLComputer(

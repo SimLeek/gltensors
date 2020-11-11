@@ -76,6 +76,22 @@ def cloud_layer_gen(width, height, depth, turbulence=1, density = 0.0, dissipati
     simplex_out.setflags(write=True)
     return simplex_out.astype(np.bool_)
 
+def moving_cloud_layer_gen(width, height, depth, time, turbulence=1, density = 0.0, dissipation_rate=.1):
+    test_computer = GLSLComputer(read_in_shader("shaders", "compute4DNoiseLayer.glsl"),
+                                 width=width, height=height, depth=depth, time=time,
+                                 turbulence=turbulence, density=density, dissipation_rate=dissipation_rate)
+
+    buff = test_computer.ctx.buffer(data = np.zeros(width*height*depth).astype(dtype=np.float32).tobytes())
+    buff.bind_to_storage_buffer(1)
+
+    test_computer.cpu.run(width,height,depth)
+
+    simplex_out = np.frombuffer(buff.read(), dtype=np.float32).reshape((width,height,depth))
+    simplex_out = np.copy(simplex_out)
+    simplex_out.setflags(write=True)
+    buff.release()
+    return simplex_out.astype(np.bool_)
+
 def inverse_cloud_layer_gen(width, height, depth, turbulence=1, density = 0.0, dissipation_rate=.1):
     test_computer = GLSLComputer(read_in_shader("shaders", "compute3DNoiseLayer.glsl"),
                                  width=width, height=height, depth=depth,

@@ -1,4 +1,3 @@
-from PyQt5 import QtOpenGL, QtCore
 from functools import wraps
 import moderngl
 import os
@@ -85,7 +84,7 @@ class GLSLWindow(QtOpenGL.QGLWidget):
                      new_vertex_shader_file=None,
                      new_fragment_shader_file=None,
                      new_uniform_dict = None):
-        self.ctx = moderngl.create_context()
+        self.ctx = moderngl.create_context(require=430)
 
         if new_fragment_shader_file:
             self.fragment_shader = new_fragment_shader_file
