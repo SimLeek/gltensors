@@ -6,6 +6,8 @@ import numpy as np
 
 import vtk
 
+import trimesh
+from trimesh.viewer.windowed import SceneViewer
 
 def convertToNumber (s):
     return int.from_bytes(s.encode(), 'little')
@@ -85,6 +87,32 @@ class TestBiomeGenerators(unittest.TestCase):
         mockmod = MockModel()
         mockmod.batch_blocks(visible_locations, 'grass')
         mockmod.show_cloud()
+
+    def test_full_biome_trimesh(self):
+        plains = biogen.plains_gen(500, 500, 100, 30, 50, turbulence=0.01).astype(np.bool_)
+        min_h = 0
+        max_h = 35
+        h = max_h - min_h
+        dissipation = 0.05
+        # us, but not them boolean operators to remove boolean arrays from other boolean arrays
+        # if I run into long strings of operators like these, consider moving back to glsl.
+        cave_caves = biogen.cloud_layer_gen(500, 500, h, 0.02, 0.0, 0) & ~biogen.cloud_layer_gen(500, 500, h, 0.1, 0.0,
+                                                                                                 0)
+        cave_caves = biogen.cloud_layer_gen(500, 500, h, 0.005, 0.0, dissipation) & ~cave_caves
+        plains[0:500, 0:500, min_h:max_h] = plains[0:500, 0:500, min_h:max_h] & ~cave_caves
+
+        #plains = biogen.plains_gen(100, 100, 50, 30, 50, turbulence=0.025)
+        mesh = trimesh.voxel.ops.matrix_to_marching_cubes(matrix=plains)
+        #assert mesh.is_watertight
+        trimesh.smoothing.filter_laplacian(mesh)
+        #mesh.show(flags={'wireframe': True})
+        s = trimesh.Scene([mesh])
+        s.show(flags={'wireframe': False})
+
+        #glb = trimesh.exchange.gltf.export_glb(s, include_normals=True)
+        #with open("terrain.glb", "wb") as f:
+        #    f.write(glb)
+
     def testVisibleGen(self):
         plains = biogen.cloud_layer_gen(100, 100, 50, 0.02, 0.0, 0)
         visible_plains = biogen.restrict_visible(plains, plains, show_bounds=True)
@@ -101,6 +129,17 @@ class TestBiomeGenerators(unittest.TestCase):
             ), 'grass'
         )
         mockmod.show_cloud()
+
+    def test_plains_trimesh(self):
+        dots = biogen.plains_gen(100, 100, 100, 30, 50, turbulence=0.01)
+        arr = np.asarray(dots, dtype=bool)
+
+        mesh = trimesh.voxel.ops.matrix_to_marching_cubes(matrix=arr)
+        assert mesh.is_watertight
+
+        mesh.show(flags={'wireframe': True})
+        s = trimesh.Scene([mesh])
+        s.show(flags={'wireframe': True})
 
     def testStoneContainer(self):
         mockmod = MockModel()
